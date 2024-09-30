@@ -1,0 +1,206 @@
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.main-wrapper {
+    overflow: hidden;
+}
+
+.student-master-list,
+.subject-master-list,
+.trait-master-list,
+.class-students-list,
+.curriculum-content-list,
+.curriculum-trait-content-list {
+    padding-right: 0;
+    height: 100%;
+}
+.class-students-list,
+.curriculum-content-list,
+.curriculum-trait-content-list {
+    padding-left: 0;
+}
+.student-master-list .panel,
+.subject-master-list .panel,
+.trait-master-list .panel,
+.class-students-list .panel,
+.curriculum-content-list .panel,
+.curriculum-trait-content-list .panel {
+    height: 100%;
+    margin-bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+.student-master-list .panel .list,
+.subject-master-list .panel .list,
+.trait-master-list .panel .list {
+    overflow-y: auto;
+    height: 100%;
+}
+.student-master-list .panel .list .list-group,
+.subject-master-list .panel .list .list-group,
+.subject-master-list .panel .list .list-group {
+    margin-bottom: 0;
+}
+
+.level-section-master-list,
+.class-schoolyear-master-list,
+.curriculum-strand-master-list,
+.semester-period-master-list,
+.reportcardtemplate-curriculum-sheet-master-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-left: 0;
+}
+.class-schoolyear-master-list .class-master-list,
+.class-schoolyear-master-list .schoolyear-master-list,
+.curriculum-strand-master-list .curriculum-master-list,
+.curriculum-strand-master-list .strand-master-list,
+.semester-period-master-list .semester-master-list,
+.semester-period-master-list .period-master-list,
+.reportcardtemplate-curriculum-sheet-master-list .curriculum-master-list,
+.reportcardtemplate-curriculum-sheet-master-list .report-card-template-master-list,
+.reportcardtemplate-curriculum-sheet-master-list .sheet-master-list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+}
+.level-section-master-list .level-master-list,
+.level-section-master-list .section-master-list,
+.level-section-master-list .teacher-master-list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 33.33%;
+}
+.level-section-master-list .level-master-list .list,
+.level-section-master-list .section-master-list .list,
+.level-section-master-list .teacher-master-list .list,
+.class-schoolyear-master-list .class-master-list .list,
+.class-schoolyear-master-list .schoolyear-master-list .list,
+.curriculum-strand-master-list .curriculum-master-list .list,
+.curriculum-strand-master-list .strand-master-list .list,
+.semester-period-master-list .semester-master-list .list,
+.semester-period-master-list .period-master-list .list,
+.reportcardtemplate-curriculum-sheet-master-list .curriculum-master-list .list,
+.reportcardtemplate-curriculum-sheet-master-list .report-card-template-master-list .list,
+.reportcardtemplate-curriculum-sheet-master-list .sheet-master-list .list {
+    height: 100%;
+    overflow-y: auto;
+}
+.level-section-master-list .level-master-list .list .list-group,
+.level-section-master-list .section-master-list .list .list-group,
+.level-section-master-list .teacher-master-list .list .list-group,
+.class-schoolyear-master-list .class-master-list .list .list-group,
+.class-schoolyear-master-list .schoolyear-master-list .list .list-group,
+.curriculum-strand-master-list .curriculum-master-list .list .list-group,
+.curriculum-strand-master-list .strand-master-list .list .list-group,
+.semester-period-master-list .semester-master-list .list .list-group,
+.semester-period-master-list .period-master-list .list .list-group,
+.reportcardtemplate-curriculum-sheet-master-list .curriculum-master-list .list .list-group,
+.reportcardtemplate-curriculum-sheet-master-list .report-card-template-master-list .list .list-group,
+.reportcardtemplate-curriculum-sheet-master-list .sheet-master-list .list .list-group {
+    margin-bottom: 0;
+}
+
+.class-students-list .panel,
+.class-master-list .panel,
+.level-section-master-list .panel,
+.level-section-master-list .panel,
+.curriculum-strand-master-list .panel,
+.semester-period-master-list .panel,
+.curriculum-content-list .panel,
+.curriculum-trait-content-list .panel,
+.reportcardtemplate-curriculum-sheet-master-list .panel {
+    display: flex;
+    flex-direction: column;
+}
+.class-students-list .panel .list,
+.class-master-list .panel .list,
+.level-section-master-list .panel .list,
+.level-section-master-list .panel .list,
+.curriculum-strand-master-list .panel .list,
+.semester-period-master-list .panel .list,
+.curriculum-content-list .panel .list,
+.curriculum-trait-content-list .panel .list,
+.reportcardtemplate-curriculum-sheet-master-list .panel .list {
+    overflow-y: auto;
+    height: 100%;
+    flex-grow: 1;
+}
+.level-section-master-list .panel .panel-footer,
+.level-section-master-list .panel .panel-footer,
+.curriculum-strand-master-list .panel .panel-footer,
+.semester-period-master-list .panel .panel-footer,
+.reportcardtemplate-curriculum-sheet-master-list .panel .panel-footer {
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+.student-master-list .list-group .list-group-item,
+.subject-master-list .list-group .list-group-item,
+.trait-master-list .list-group .list-group-item,
+.class-students-list .list-group .list-group-item,
+.level-section-master-list .list-group .list-group-item,
+.level-section-master-list .list-group .list-group-item,
+.class-master-list .list-group .list-group-item,
+.schoolyear-master-list .list-group .list-group-item,
+.curriculum-strand-master-list .list-group .list-group-item,
+.semester-period-master-list .list-group .list-group-item,
+.curriculum-content-list .list-group .list-group-item,
+.curriculum-trait-content-list .list-group .list-group-item,
+.reportcardtemplate-curriculum-sheet-master-list .list-group .list-group-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+
+    border-radius: 0;
+}
+.class-master-list .list-group .list-group-item .class-name-and-adviser-label {
+    flex-grow: 1;
+    pointer-events: none;
+}
+.student-master-list .list-group .list-group-item .btn svg,
+.subject-master-list .list-group .list-group-item .btn svg,
+.trait-master-list .list-group .list-group-item .btn svg,
+.class-students-list .list-group .list-group-item .btn svg,
+.level-section-master-list .list-group .list-group-item .btn svg,
+.level-section-master-list .list-group .list-group-item .btn svg,
+.class-master-list .list-group .list-group-item .btn svg,
+.schoolyear-master-list .list-group .list-group-item .btn svg,
+.class-students-list .panel .panel-footer .btn svg,
+.curriculum-strand-master-list .list-group .list-group-item .btn svg,
+.semester-period-master-list .list-group .list-group-item .btn svg,
+.curriculum-content-list .list-group .list-group-item .btn svg,
+.curriculum-trait-content-list .list-group .list-group-item .btn svg,
+.curriculum-content-list .panel .panel-footer .btn svg,
+.curriculum-trait-content-list .panel .panel-footer .btn svg,
+.reportcardtemplate-curriculum-sheet-master-list .panel .panel-footer .btn svg {
+    pointer-events: none;
+}
+.student-master-list .list-group .list-group-item:hover,
+.level-section-master-list .list-group .list-group-item:hover,
+.level-section-master-list .list-group .list-group-item:hover,
+.class-schoolyear-master-list .list-group .list-group-item:hover,
+.curriculum-strand-master-list .list-group .list-group-item:hover,
+.semester-period-master-list .list-group .list-group-item:hover,
+.subject-master-list .list-group .list-group-item:hover,
+.trait-master-list .list-group .list-group-item:hover,
+.reportcardtemplate-curriculum-sheet-master-list .list-group .list-group-item:hover,
+.class-schoolyear-master-list .list-group .list-group-item:hover .text-muted {
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+.class-schoolyear-master-list .list-group .list-group-item .text-muted {
+    margin: 0;
+}
+.modal-backdrop {
+    background-color: #0000009c;
+}

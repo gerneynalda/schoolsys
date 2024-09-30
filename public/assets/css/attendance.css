@@ -1,0 +1,95 @@
+svg {
+    pointer-events: none;
+}
+.container-fluid.school-days-container {
+    padding: 0;
+   
+    height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+}
+.container-fluid.school-days-container .col-md-4 {
+    padding-right: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 100%;
+}
+.container-fluid.school-days-container .col-md-4:first-child {
+    padding: 0;
+}
+.container-fluid.school-days-container .col-md-4 .panel {
+    margin: 0;
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.container-fluid.school-days-container .col-md-4 .panel .panel-body {
+    flex-grow: 1;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+
+    padding: 0;
+}
+.container-fluid.school-days-container .col-md-4 .panel .panel-body .list-group {
+    margin: 0;
+}
+.container-fluid.school-days-container .col-md-4 .panel  .list-group .list-group-item {
+    border-radius: 0;
+    cursor: pointer;
+}
+.container-fluid.school-days-container .col-md-4 .panel.schoolyear-schooldays .panel-body {
+    padding: 0;
+}
+.container-fluid.school-days-container .col-md-4 .panel.schoolyear-schooldays .panel-body .list-group-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 0;
+}
+.container-fluid.school-days-container .col-md-4 .panel.schoolyear-schooldays .panel-body .list-group-item .form-control {
+    width: 60px;
+}
+
+.attendance-table thead tr {
+    background: green;
+    color: #fff;
+}
+.attendance-table thead tr th {
+    max-width: 70px;
+    width: 100%;
+}
+.attendance-table tbody tr:hover input {
+    /* color: #fff; */
+}
+.attendance-table tbody tr:focus-within {
+    background: green;
+    color: #fff;
+}
+.attendance-table tbody tr input:focus {
+    color: #fff;
+}
+.attendance-table tbody tr td {
+    padding: 2px;
+}
+.attendance-table tbody tr td:first-of-type {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.attendance-table tr td input {
+    border-radius: 0;
+    padding: 0;
+
+    text-align: center;
+}

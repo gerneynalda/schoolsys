@@ -1,0 +1,100 @@
+svg {
+    pointer-events: none;
+}
+.panel .list-group-item {
+    border-radius: 0;
+}
+
+.report-card-template-curriculum-sheet-master-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-left: 0;
+}
+.report-card-template-curriculum-sheet-master-list .panel {
+    margin-bottom: 0;
+    height: 33.33%;
+
+    display: flex;
+    flex-direction: column;
+}
+.report-card-template-curriculum-sheet-master-list .panel .panel-body form .form-group {
+    margin-bottom: 0;
+}
+.report-card-template-curriculum-sheet-master-list .panel .list {
+    overflow-y: auto;
+    height: 100%;
+    flex-grow: 1;
+}
+.report-card-template-curriculum-sheet-master-list .panel .list .list-group-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    cursor: pointer;
+}
+.report-card-template-curriculum-sheet-master-list .panel svg {
+    pointer-events: none;
+}
+.report-card-template-curriculum-sheet-master-list .panel .list .list-group-item:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+.modal-backdrop {
+    background: rgba(0,0,0,0.5)
+}
+
+.config-sheet-list,
+.config-options {
+    padding-right: 0;
+    height: 100%;
+}
+.config-sheet-list .panel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+.config-sheet-list .panel .list {
+    flex-grow: 1;
+    overflow-y: auto;
+    height: 100%;
+}
+.config-sheet-list .panel .list .list-group-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    cursor: pointer;
+}
+.config-options {
+    padding-left: 0;
+    padding-right: 0;
+}
+.config-options .panel {
+    margin-bottom: 0;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+.config-options .panel .panel-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    height: 100%
+}
+.config-options .panel .list {
+    flex-grow: 1;
+    overflow-y: auto;
+    height: 100%;
+}
+.config-options .panel .list .list-group-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    cursor: pointer;
+}

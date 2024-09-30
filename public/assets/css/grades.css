@@ -1,0 +1,35 @@
+.main-wrapper {
+    overflow: auto;
+}
+.table-grades th,
+.table-grades td {
+    padding: 2px !important;
+    text-align: center;
+}
+.table-grades thead tr {
+    background: green;
+}
+.table-grades thead tr th {
+    color: #fff;
+}
+.table-grades th {
+    width: 35px !important;
+    text-overflow: ellipsis;
+}
+.table-grades tbody tr:focus-within {
+    background: green;
+    color: #fff;
+}
+.table-grades tbody tr input:focus {
+    color: #fff;
+}
+.table-grades tr td:nth-of-type(1) {
+    min-width: 150px;
+    text-align: left;
+    padding: 2px 15px !important;
+}
+.table-grades td input {
+    border-radius: 0;
+    padding: 0;
+    text-align: center;
+}

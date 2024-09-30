@@ -1,0 +1,52 @@
+body {
+    background: #b1c1c8;
+}
+.student-details {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.student-details  > .col-md-3 {
+    padding: 0;
+}
+.student-details .details-column {
+    padding-right: 0;
+    height: 100%;
+}
+.student-details .details-column > .col-md-2 {
+    padding: 0;
+    background: #fff;
+}
+.student-details .details-column > .col-md-2 .nav li:first-child {
+    border-top: 1px solid #b7c6b6;
+}
+.student-details .details-column > .col-md-2 .nav li {
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #b7c6b6;
+    border-left: 1px solid #b7c6b6;
+    border-color: #b7c6b6;
+    margin: 0;
+}
+.student-details .details-column > .col-md-2 .nav li.active {
+    border-right: 0;
+    border-right-color: #fff;
+}
+.student-details .details-column > .col-md-2 .nav li,
+.student-details .details-column > .col-md-2 .nav li a {
+
+    border-radius: 0;
+
+}
+.student-details .details-column > .col-md-10 {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    border: 1px solid #b7c6b6;
+    background: #fff;
+    height: 100%;
+}
+
+.student-details .row .col-md-12 {
+    padding-left: 0;
+}
+

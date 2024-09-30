@@ -1,0 +1,69 @@
+<?php
+
+class Model_Schoolyearmonthlyattendance extends \Orm\Model
+{
+	protected static $_properties = array(
+		"id" => array(
+			"label" => "Id",
+			"data_type" => "int",
+		),
+		"lrn" => array(
+			"label" => "Lrn",
+			"data_type" => "varchar",
+		),
+		"schoolyear_id" => array(
+			"label" => "Schoolyear id",
+			"data_type" => "int",
+		),
+		"schooldays_id" => array(
+			"label" => "Schooldays id",
+			"data_type" => "int",
+		),
+		"days_present" => array(
+			"label" => "Days present",
+			"data_type" => "int",
+		),
+		"days_tardy" => array(
+			"label" => "Days tardy",
+			"data_type" => "int",
+		),
+		"created_at" => array(
+			"label" => "Created at",
+			"data_type" => "int",
+		),
+		"updated_at" => array(
+			"label" => "Updated at",
+			"data_type" => "int",
+		),
+	);
+
+	protected static $_observers = array(
+		'Orm\Observer_CreatedAt' => array(
+			'events' => array('before_insert'),
+			'property' => 'created_at',
+			'mysql_timestamp' => false,
+		),
+		'Orm\Observer_UpdatedAt' => array(
+			'events' => array('before_update'),
+			'property' => 'updated_at',
+			'mysql_timestamp' => false,
+		),
+	);
+
+	protected static $_table_name = 'schoolyearmonthlyattendances';
+
+	protected static $_primary_key = array('id');
+
+	protected static $_has_many = array(
+	);
+
+	protected static $_many_many = array(
+	);
+
+	protected static $_has_one = array(
+	);
+
+	protected static $_belongs_to = array(
+	);
+
+}

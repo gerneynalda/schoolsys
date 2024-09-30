@@ -1,0 +1,17 @@
+.system-notifications-wrapper {
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    width: auto;
+    z-index: 99999;
+}
+.system-notifications-wrapper .alert {
+    margin: 0;
+    position: relative;
+
+    transition: all 300ms ease-in-out;
+}

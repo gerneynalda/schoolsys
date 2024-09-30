@@ -1,0 +1,9 @@
+.student-list thead tr {
+    background: green;
+}
+.student-list thead tr th {
+    color: #fff;
+}
+.student-list thead tr th:first-of-type {
+    width: 15px;
+}
