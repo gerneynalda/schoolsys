@@ -63,6 +63,9 @@ class Controller_Student extends Controller_Template
 					'firstname' => trim(Input::post('firstname')),
 					'middlename' => trim(Input::post('middlename')),
 					'suffix' => trim(Input::post('suffix')),
+					'gender'	=> trim(Input::post('gender')),
+					'birthdate'	=> trim(Input::post('birthdate')),
+					'contact_no'	=> trim(Input::post('contact_no')),
 				));
 
 				if ($student and $student->save())
@@ -115,11 +118,13 @@ class Controller_Student extends Controller_Template
 			$student->firstname = trim(Input::post('firstname'));
 			$student->middlename = trim(Input::post('middlename'));
 			$student->suffix = trim(Input::post('suffix'));
+			$student->gender = 	trim(Input::post('gender'));
+			$student->birthdate	= trim(Input::post('birthdate'));
+			$student->contact_no = trim(Input::post('contact_no'));
 
 			if ($student->save())
 			{
 				Session::set_flash('success', 'Student information has been updated.');
-
 				Response::redirect('student/edit/'.$id);
 			}
 
@@ -138,6 +143,9 @@ class Controller_Student extends Controller_Template
 				$student->firstname = $val->validated('firstname');
 				$student->middlename = $val->validated('middlename');
 				$student->suffix = $val->validated('suffix');
+				$student->gender = 	$val->validated('gender');
+				$student->birthdate	=  $val->validated('birthdate');
+				$student->contact_no = $val->validated('contact_no');
 
 				Session::set_flash('error', $val->error());
 			}
