@@ -4,7 +4,18 @@
 	<h2>Edit <span class='muted'>Student</span></h2>
 
 	<?php echo Session::get_flash('success') ? "<div class='alert alert-success'><strong>".Session::get_flash('success')."</strong></div>": "" ?>
-	<?php echo Session::get_flash('error') ? "<div class='alert alert-success'><strong>".Session::get_flash('success')."</strong></div>": "" ?>
+	
+	<?php 
+		
+		if(is_array(Session::get_flash('error'))) {
+
+			foreach(Session::get_flash('error') as $error) {
+				echo "<div class='alert alert-danger'><strong>".$error."</strong></div>";
+			}
+
+		}
+		
+	?>
 
     <?php echo render('student/_form'); ?>
 	<p>
