@@ -10,6 +10,7 @@ class Create_reportcardconfigurations
 			'id' => array('type' => 'int', 'unsigned' => true, 'null' => false, 'auto_increment' => true, 'constraint' => 11),
 			'reportcardtemplate_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
 			'curriculum_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
+			'strand_id' => array('constraint' => '11', 'null' => false, 'type' => 'int'),
 			'configuration' => array('null' => false, 'type' => 'text'),
 			'created_at' => array('constraint' => 11, 'null' => true, 'type' => 'int', 'unsigned' => true),
 			'updated_at' => array('constraint' => 11, 'null' => true, 'type' => 'int', 'unsigned' => true),
