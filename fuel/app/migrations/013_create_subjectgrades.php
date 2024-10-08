@@ -8,7 +8,7 @@ class Create_subjectgrades
 	{
 		\DBUtil::create_table('subjectgrades', array(
 			'id' => array('type' => 'int', 'unsigned' => true, 'null' => false, 'auto_increment' => true, 'constraint' => 11),
-			'lrn' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
+			'lrn' => array('constraint' => 250, 'null' => false, 'type' => 'varchar'),
 			'schoolyear_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
 			'class_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
 			'curriculum_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
