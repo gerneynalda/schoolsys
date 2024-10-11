@@ -88,8 +88,9 @@ getAttendanceBtn.addEventListener("click", async (e) => {
         return false
     }
 
-    // get class
+    // Get class
     let studentclass = await getSchoolyearClassStudentList(class_id, schoolyear_id)
+
     totalStudents = studentclass.data.length
     if(studentclass.data.length <= 0) {
         // hide loader
@@ -109,18 +110,11 @@ getAttendanceBtn.addEventListener("click", async (e) => {
         addNotificationToQeue("alert-info", "There are no students in this class for this school year.")
         return false
     }
-    let lrns = []
-    for(let i in studentclass.data) {
-        lrns.push(studentclass.data[i].lrn)
-    }
 
     // get school days
     let tableheaders = await getSchoolyearSchoolDays(schoolyear_id)
-    // get student data base on the lrn
-    let studentrecords = await getStudentListByLrn(lrns)
-    // 
-    await updateAttendanceTableContent(studentrecords.data, tableheaders.data)
-
+    // tabulate data
+    await updateAttendanceTableContent(studentclass.data, tableheaders.data)
     // hide loader
     loader.setAttribute("style","display:none;")
 
@@ -167,7 +161,6 @@ attendanceTable.addEventListener("keyup", async (e) => {
 
 async function updateAttendanceTableContent(student, headers)
 {   
-
     let header_rows = `<thead><tr><th>Name</th>`
     let input_fields = ''
     let months = []

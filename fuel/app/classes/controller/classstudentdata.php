@@ -15,9 +15,14 @@ class Controller_Classstudentdata extends Controller_Rest
 
 		$class_id = Input::get("classid");
 		$schoolyear_id = Input::get("schoolyearid");
+		// $filter = Input::get("filter");
 
-		$sql = "SELECT * FROM `schoolyearclassstudents` WHERE `class_id` = ". $class_id." AND `schoolyear_id` = ".$schoolyear_id;
-		$class_students = DB::query($sql)->as_object('Model_Schoolyearclassstudent')->execute();
+		$sql = "SELECT * FROM `students` 
+		INNER JOIN `schoolyearclassstudents` ON `schoolyearclassstudents`.`lrn` = `students`.`lrn` 
+		WHERE `schoolyearclassstudents`.`class_id` = {$class_id} AND `schoolyearclassstudents`.`schoolyear_id` =  {$schoolyear_id} 
+		ORDER BY `students`.`gender` DESC, `students`.`lastname` ASC";
+			
+		$class_students = DB::query($sql)->as_object('Model_Student')->execute();
 
 		// prevent CORS Issue
 		$this->response->set_header("Access-Control-Allow-Origin", "*");
