@@ -58,7 +58,7 @@ svg {
     border-radius: 0;
 }
 .container-fluid.school-days-container .col-md-4 .panel.schoolyear-schooldays .panel-body .list-group-item .form-control {
-    width: 60px;
+    width: 100px;
 }
 
 .attendance-table thead tr {
@@ -66,7 +66,7 @@ svg {
     color: #fff;
 }
 .attendance-table thead tr th {
-    max-width: 70px;
+    max-width: 110px;
     width: 100%;
 }
 .attendance-table tbody tr:hover input {
