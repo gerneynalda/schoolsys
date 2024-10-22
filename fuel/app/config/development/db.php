@@ -22,7 +22,7 @@
 return array(
 	'default' => array(
 		'connection' => array(
-			'dsn'      => 'mysql:host=localhost;dbname=fgrades',
+			'dsn'      => 'mysql:host=localhost;dbname=migrationtest',
 			'username' => 'root',
 			'password' => '',
 		),

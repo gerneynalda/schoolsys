@@ -202,11 +202,11 @@ async function tabulateMonthlyAttendance(lrn, schoolyear, months, type, tabIndex
             value = result.data[months[i]][type] != null ? result.data[months[i]][type] : ''
             color = result.data[months[i]][type] != null ? '' : "style='background: #ff000040';"
 
-            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-id="${result.data[months[i]].id}" value="${value}"  maxlength=2 /></td>`
+            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-id="${result.data[months[i]].id}" value="${value}" /></td>`
 
         }else {
             color = 'style="background: #ff000040";'
-            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-lrn="${lrn}" data-schoolyearid="${schoolyear}" data-schooldaysid="${months[i]}" value=""  maxlength=2 /></td>`
+            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-lrn="${lrn}" data-schoolyearid="${schoolyear}" data-schooldaysid="${months[i]}" value="" /></td>`
         }
         
         index += totalStudents
