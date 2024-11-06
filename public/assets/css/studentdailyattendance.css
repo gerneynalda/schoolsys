@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.dailyattendance-container {
+    height: 100%;
+    width: 100%;
+    padding: 5%;
+}
+
+.dailyattendance-container .row {
+
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+}
+
+.dailyattendance-container .row .col-md-12 {
+    height: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.dailyattendance-container .photo-and-name {
+
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+
+}
+
+.dailyattendance-container .photo-and-name .photo {
+    flex-grow: 1;
+}
+
+.dailyattendance-container .datetime-and-message {
+
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+
+}
+
+.dailyattendance-container .datetime-and-message .datetime {
+
+    flex-grow: 1;
+
+}
