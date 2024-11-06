@@ -102,7 +102,11 @@ class Controller_Createreportcarddata extends Controller_Rest
                 // per sheet
                 // if a config have multiple sheet means it has multiple worksheet
                 $clonedWorksheet = clone $spreadsheet->getSheet($sheetIndex);
-                $clonedWorksheet->setTitle($value['lastname'].", ".$value["firstname"][0]." ".$value["middlename"][0]."_".$sheetIndex);
+                // [firstname][0] meanins the first character; same with middlename
+                $firstname = is_null($value['firstname']) || (trim($value['firstname']) == "") ? "" : $value['firstname'][0]; 
+                $middlename = is_null($value['middlename']) || (trim($value['middlename']) == "") ? "" : $value['middlename'][0];
+
+                $clonedWorksheet->setTitle($value['lastname'].", ".$firstname." ".$middlename."_".$sheetIndex);
 
                 // per config
                 foreach($sheet as $config) {
