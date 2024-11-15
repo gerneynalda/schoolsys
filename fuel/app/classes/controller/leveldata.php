@@ -5,6 +5,12 @@ class Controller_Leveldata extends Controller_Rest
 	public function before()
     {
         parent::before();
+
+		if(!Auth::check()) {
+
+			Response::redirect('authenticate/login');
+		}
+		
         $this->response->set_header("Access-Control-Allow-Origin", '*');
         $this->response->set_header("Access-Control-Allow-Header", "AccountKey,x-requested-with, Content-Type, origin, authorization, accept, client-security-token, host, date, cookie, cookie2");
         $this->response->set_header("Access-Control-Max-Age", '60');

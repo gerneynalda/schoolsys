@@ -76,8 +76,14 @@
 				<a class="navbar-brand general-menu-toggle-btn" href="#" id="general-menu-btn"><i class="fa-solid fa-circle-chevron-right"></i></a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				
+				<div class="btn-group navbar-form navbar-right" role="group" aria-label="Logout">
+					<a type="button" class="btn btn-primary btn-sm" href="<?php echo Uri::create('authenticate/userLoggedOut')?>" title="Logout" aria-label="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+				</div>
+
 				<!-- Specific Menu -->
 				<?php echo isset($customMenu) ? $customMenu : ""; ?>
+
 			</div>
 		</div>
 	</nav>
