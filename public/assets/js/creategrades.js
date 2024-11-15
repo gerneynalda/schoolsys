@@ -5,8 +5,6 @@ let strandOptionsInput = document.querySelector("#select-strand-dropdown")
 let semesterOptionsInput = document.querySelector("#select-semester-dropdown")
 let periodOptionsInput = document.querySelector("#select-period-dropdown")
 let startQuery = document.querySelector("#start-query")
-let tabbingCheckbox = document.querySelector("#toggle-tabbing")
-let tabbingDescription = document.querySelector("#tabbing-description")
 
 // let generateReportCardBtn = document.querySelector("#generate-report-card")
 // let selectAllStudents = document.querySelector("#select-all-students")
@@ -257,21 +255,6 @@ closeDialogBtn.addEventListener("click", (e)=>{
     $("#download-dialog").modal('hide')
 })
 
-// Tabbing Toggle
-tabbingCheckbox.addEventListener("click", (e)=> {
-
-    if(e.target.checked) {
-
-        tabbingDescription.value = "Vertical Tabbing"
-
-    } else {
-
-        tabbingDescription.value = "Horizontal Tabbing"
-
-    }
-
-})
-
 function removeFromSelectedLRN(lrn) 
 {
     // get index of the value
@@ -289,23 +272,10 @@ async function studentSubjectsGradeUI(lrn, subjectsarr, schoolyearid, semesterid
     let inputGrades = ""
     let ti = tabindex
     let color = ''
-
-    if(tabbingCheckbox.checked) {
-
-        for(let i in subjectsarr) {
-            color = result.data.hasOwnProperty(subjectsarr[i]) ? '' : "style='background: #ff000040';"
-            inputGrades += result.data.hasOwnProperty(subjectsarr[i]) ? `<td><input class="form-control" type="text" ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value=${result.data[subjectsarr[i]].grade} maxlength="3" size="3" /></td>` : `<td><input class="form-control" type="text" ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="" maxlength="3" size="3"/></td>`
-            ti += totalStudents
-        }
-
-    } else {
-
-        for(let i in subjectsarr) {
-            color = result.data.hasOwnProperty(subjectsarr[i]) ? '' : "style='background: #ff000040';"
-            inputGrades += result.data.hasOwnProperty(subjectsarr[i]) ? `<td><input class="form-control" type="text" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value=${result.data[subjectsarr[i]].grade} maxlength="3" size="3" /></td>` : `<td><input class="form-control" type="text" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="" maxlength="3" size="3"/></td>`
-            ti += totalStudents
-        }
-
+    for(let i in subjectsarr) {
+        color = result.data.hasOwnProperty(subjectsarr[i]) ? '' : "style='background: #ff000040';"
+        inputGrades += result.data.hasOwnProperty(subjectsarr[i]) ? `<td><input class="form-control" type="text" ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value=${result.data[subjectsarr[i]].grade} maxlength="3" size="3" /></td>` : `<td><input class="form-control" type="text" ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="" maxlength="3" size="3"/></td>`
+        ti += totalStudents
     }
 
     return inputGrades

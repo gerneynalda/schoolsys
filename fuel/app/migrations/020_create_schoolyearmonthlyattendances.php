@@ -11,7 +11,7 @@ class Create_schoolyearmonthlyattendances
 			'lrn' => array('constraint' => 250, 'null' => false, 'type' => 'varchar'),
 			'schoolyear_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
 			'schooldays_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
-			'days_present' => array('null' => false, 'type' => 'float'),
+			'days_present' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
 			'days_tardy' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
 			'created_at' => array('constraint' => 11, 'null' => true, 'type' => 'int', 'unsigned' => true),
 			'updated_at' => array('constraint' => 11, 'null' => true, 'type' => 'int', 'unsigned' => true),

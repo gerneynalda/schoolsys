@@ -88,9 +88,8 @@ getAttendanceBtn.addEventListener("click", async (e) => {
         return false
     }
 
-    // Get class
+    // get class
     let studentclass = await getSchoolyearClassStudentList(class_id, schoolyear_id)
-
     totalStudents = studentclass.data.length
     if(studentclass.data.length <= 0) {
         // hide loader
@@ -110,11 +109,18 @@ getAttendanceBtn.addEventListener("click", async (e) => {
         addNotificationToQeue("alert-info", "There are no students in this class for this school year.")
         return false
     }
+    let lrns = []
+    for(let i in studentclass.data) {
+        lrns.push(studentclass.data[i].lrn)
+    }
 
     // get school days
     let tableheaders = await getSchoolyearSchoolDays(schoolyear_id)
-    // tabulate data
-    await updateAttendanceTableContent(studentclass.data, tableheaders.data)
+    // get student data base on the lrn
+    let studentrecords = await getStudentListByLrn(lrns)
+    // 
+    await updateAttendanceTableContent(studentrecords.data, tableheaders.data)
+
     // hide loader
     loader.setAttribute("style","display:none;")
 
@@ -161,6 +167,7 @@ attendanceTable.addEventListener("keyup", async (e) => {
 
 async function updateAttendanceTableContent(student, headers)
 {   
+
     let header_rows = `<thead><tr><th>Name</th>`
     let input_fields = ''
     let months = []
@@ -202,11 +209,11 @@ async function tabulateMonthlyAttendance(lrn, schoolyear, months, type, tabIndex
             value = result.data[months[i]][type] != null ? result.data[months[i]][type] : ''
             color = result.data[months[i]][type] != null ? '' : "style='background: #ff000040';"
 
-            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-id="${result.data[months[i]].id}" value="${value}" /></td>`
+            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-id="${result.data[months[i]].id}" value="${value}"  maxlength=2 /></td>`
 
         }else {
             color = 'style="background: #ff000040";'
-            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-lrn="${lrn}" data-schoolyearid="${schoolyear}" data-schooldaysid="${months[i]}" value="" /></td>`
+            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-lrn="${lrn}" data-schoolyearid="${schoolyear}" data-schooldaysid="${months[i]}" value=""  maxlength=2 /></td>`
         }
         
         index += totalStudents

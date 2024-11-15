@@ -3,14 +3,8 @@
 class Controller_Grades extends Controller_Template
 {
 	public function before()
-	{	
+	{
 		parent::before();
-		
-		if(!Auth::check()) {
-
-			Response::redirect('authenticate/login');
-		}
-		
 		// add new asset path
 		Asset::add_path("assets/fontawesome-free-6.5.2-web/css/", "css");
 		Asset::add_path("assets/fontawesome-free-6.5.2-web/js/", "js");
@@ -21,7 +15,7 @@ class Controller_Grades extends Controller_Template
 	}
 
 	public function action_index()
-	{	
+	{
 		// Read files folder to check for datafiles
 		// controller specific styles and scripts
 		$this->template->set_global("styles", array("style.css"));
@@ -113,22 +107,10 @@ class Controller_Grades extends Controller_Template
 		$custom_menu .= '</form>';
 
 		// show subject grades table or trait grades table
-		$custom_menu .= '<div class="btn-group navbar-form navbar-left" role="group" aria-label="Select subject or trait operation.">
+		$custom_menu .= '<div class="btn-group navbar-form navbar-left" role="group" aria-label="...">
 		<button type="button" class="btn btn-primary btn-sm active" id="show-subject-grades-table-btn">Subjects</button>
 		<button type="button" class="btn btn-primary btn-sm" id="show-trait-grades-table-btn">Traits</button>
 		</div>';
-
-		// toggle tabbing horizontal tabbing (normal);
-		// vertical tabbing
-		$custom_menu .= '<form class="navbar-form navbar-left" role="search">
-		<div class="input-group">
-		<span class="input-group-addon">
-			<input type="checkbox" aria-label="Toggle horizontal or vertical tabbing" id="toggle-tabbing" checked>
-		</span>
-		<input type="text" class="form-control input-sm" aria-label="Tabbing indication." id="tabbing-description" value="Vertical Tabbing">
-		</div>
-		</form>
-		';
 		
 		// send menu to the template
 		$this->template->set('customMenu', $custom_menu, false);

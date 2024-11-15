@@ -5,12 +5,6 @@ class Controller_Classstudentdata extends Controller_Rest
 	public function before()
     {
         parent::before();
-
-		if(!Auth::check()) {
-
-			Response::redirect('authenticate/login');
-		}
-		
         $this->response->set_header("Access-Control-Allow-Origin", '*');
         $this->response->set_header("Access-Control-Allow-Header", "AccountKey,x-requested-with, Content-Type, origin, authorization, accept, client-security-token, host, date, cookie, cookie2");
         $this->response->set_header("Access-Control-Max-Age", '60');
@@ -21,14 +15,9 @@ class Controller_Classstudentdata extends Controller_Rest
 
 		$class_id = Input::get("classid");
 		$schoolyear_id = Input::get("schoolyearid");
-		// $filter = Input::get("filter");
 
-		$sql = "SELECT * FROM `students` 
-		INNER JOIN `schoolyearclassstudents` ON `schoolyearclassstudents`.`lrn` = `students`.`lrn` 
-		WHERE `schoolyearclassstudents`.`class_id` = {$class_id} AND `schoolyearclassstudents`.`schoolyear_id` =  {$schoolyear_id} 
-		ORDER BY `students`.`gender` DESC, `students`.`lastname` ASC";
-			
-		$class_students = DB::query($sql)->as_object('Model_Student')->execute();
+		$sql = "SELECT * FROM `schoolyearclassstudents` WHERE `class_id` = ". $class_id." AND `schoolyear_id` = ".$schoolyear_id;
+		$class_students = DB::query($sql)->as_object('Model_Schoolyearclassstudent')->execute();
 
 		// prevent CORS Issue
 		$this->response->set_header("Access-Control-Allow-Origin", "*");
