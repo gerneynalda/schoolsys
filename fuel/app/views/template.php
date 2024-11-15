@@ -78,7 +78,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				
 				<div class="btn-group navbar-form navbar-right" role="group" aria-label="Logout">
-					<a type="button" class="btn btn-primary btn-sm" href="<?php echo Uri::create('authenticate/userLoggedOut')?>"><i class="fa-solid fa-cog"></i></a>
+					<a type="button" class="btn btn-primary btn-sm" href="<?php echo Uri::create('authenticate/userLoggedOut')?>" title="Logout" aria-label="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
 				</div>
 
 				<!-- Specific Menu -->
