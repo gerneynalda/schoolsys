@@ -5,6 +5,12 @@ class Controller_Reportcard extends Controller_Template
 	public function before()
 	{
 		parent::before();
+
+		if(!Auth::check()) {
+
+			Response::redirect('authenticate/login');
+		}
+		
 		// add new asset path
 		Asset::add_path("assets/fontawesome-free-6.5.2-web/css/", "css");
 		Asset::add_path("assets/fontawesome-free-6.5.2-web/js/", "js");

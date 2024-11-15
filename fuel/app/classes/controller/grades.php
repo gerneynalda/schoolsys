@@ -3,8 +3,14 @@
 class Controller_Grades extends Controller_Template
 {
 	public function before()
-	{
+	{	
 		parent::before();
+		
+		if(!Auth::check()) {
+
+			Response::redirect('authenticate/login');
+		}
+		
 		// add new asset path
 		Asset::add_path("assets/fontawesome-free-6.5.2-web/css/", "css");
 		Asset::add_path("assets/fontawesome-free-6.5.2-web/js/", "js");
@@ -15,7 +21,7 @@ class Controller_Grades extends Controller_Template
 	}
 
 	public function action_index()
-	{
+	{	
 		// Read files folder to check for datafiles
 		// controller specific styles and scripts
 		$this->template->set_global("styles", array("style.css"));
