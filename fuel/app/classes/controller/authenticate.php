@@ -5,8 +5,16 @@ class Controller_Authenticate extends Controller_Hybrid
 
 	public function before()
 	{
-
+		
 		parent::before();
+		
+		
+		if(Auth::check()){
+
+			Response::redirect('grades');
+		
+		}
+
 		// add new asset path
 		Asset::add_path("assets/fontawesome-free-6.5.2-web/css/", "css");
 		Asset::add_path("assets/fontawesome-free-6.5.2-web/js/", "js");
