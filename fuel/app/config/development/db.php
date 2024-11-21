@@ -22,7 +22,7 @@
 return array(
 	'default' => array(
 		'connection' => array(
-			'dsn'      => 'mysql:host=localhost;dbname=migrationtest',
+			'dsn'      => 'mysql:host=localhost;dbname=migrationtest3',
 			'username' => 'root',
 			'password' => '',
 		),
