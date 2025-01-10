@@ -280,8 +280,6 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-create-subject-modal-trigger
-
 <!-- Create or Edit Subject -->
 <div class="modal .fade" tabindex="-1" role="dialog" id="subject-create-edit-modal">
   <div class="modal-dialog" role="document">

@@ -37,8 +37,8 @@ class Model_Student extends Model
 		$val->add_field('middlename', 'Middlename', 'max_length[150]');
 		$val->add_field('suffix', 'Suffix', 'max_length[3]');
 		$val->add_field('gender', 'Gender', 'required|max_length[6]');
-		$val->add_field('birthdate', 'Birthdate', 'required|max_length[10]');
-		$val->add_field('contact_no', 'Contact No.', 'required|max_length[15]');
+		$val->add_field('birthdate', 'Birthdate', 'max_length[10]');
+		$val->add_field('contact_no', 'Contact No.', 'max_length[15]');
 
 		return $val;
 	}

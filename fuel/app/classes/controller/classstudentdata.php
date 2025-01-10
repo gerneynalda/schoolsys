@@ -23,7 +23,7 @@ class Controller_Classstudentdata extends Controller_Rest
 		$schoolyear_id = Input::get("schoolyearid");
 		// $filter = Input::get("filter");
 
-		$sql = "SELECT `students`.`lrn`, `students`.`lastname`, `students`.`firstname`, `students`.`middlename`, `students`.`gender`, `students`.`suffix` FROM `students` 
+		$sql = "SELECT `students`.`id`, `students`.`lrn`, `students`.`lastname`, `students`.`firstname`, `students`.`middlename`, `students`.`gender`, `students`.`suffix` FROM `students` 
 		INNER JOIN `schoolyearclassstudents` ON `schoolyearclassstudents`.`lrn` = `students`.`lrn` 
 		WHERE `schoolyearclassstudents`.`class_id` = {$class_id} AND `schoolyearclassstudents`.`schoolyear_id` =  {$schoolyear_id} 
 		ORDER BY `students`.`gender` DESC, `students`.`lastname` ASC";
@@ -125,4 +125,5 @@ class Controller_Classstudentdata extends Controller_Rest
 		}
 
 	}
+
 }
