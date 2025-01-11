@@ -145,15 +145,29 @@ class Controller_Reportcardtemplatedata extends Controller_Rest
                         "filepath"  => $dpath.$_FILES['file']['name']
                     ]);
 
-                    if($reportcard->save()) {
-                        // uploaded to directory and save to database
-                        return $this->response([
-                            "success"   => true,
-                            "message"   => "Report card template was successfully uploaded.",
-                            "data"      => []
-                        ]);
+                    try {
 
-                    }else {
+                        if($reportcard->save()) {
+                            // uploaded to directory and save to database
+                            return $this->response([
+                                "success"   => true,
+                                "message"   => "Report card template was successfully uploaded.",
+                                "data"      => []
+                            ]);
+
+                        }else {
+
+                            // if was uploaded and not save to the database delete the file.
+                            unlink($dpath.$_FILES['file']['name']);
+                            return $this->response([
+                                "success"   => true,
+                                "message"   => "Something went wrong, file was uploaded but unable to store file information in the database.",
+                                "data"      => []
+                            ]);
+
+                        }
+
+                    } catch(Exception $e) {
 
                         // if was uploaded and not save to the database delete the file.
                         unlink($dpath.$_FILES['file']['name']);
@@ -165,7 +179,6 @@ class Controller_Reportcardtemplatedata extends Controller_Rest
 
                     }
                     
-
                 }else{
 
                     return $this->response([
