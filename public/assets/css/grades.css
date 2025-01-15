@@ -18,10 +18,13 @@
 }
 .table-grades tbody tr:focus-within {
     background: green;
-    color: #fff;
+    color: #000;
 }
 .table-grades tbody tr input:focus {
-    color: #fff;
+    color: #000;
+}
+.table-grades tbody tr input {
+    color: #000;
 }
 .table-grades tr td:nth-of-type(1) {
     min-width: 150px;

@@ -113,7 +113,7 @@ class Controller_Createreportcarddata extends Controller_Rest
                 $middlename = is_null($value['middlename']) || (trim($value['middlename']) == "") ? "" : $value['middlename'][0];
 
                 $clonedWorksheet->setTitle($value['lastname'].", ".$firstname." ".$middlename."_".$sheetIndex);
-
+                
                 // per config
                 foreach($sheet as $config) {
                     switch($config->type) {
@@ -140,15 +140,30 @@ class Controller_Createreportcarddata extends Controller_Rest
                             break;
                         case "subject":
                             // block of code for subject grades
+
+                            // if the lrn cannot be found on $subjectGradeArr means no grade has been encoded.
+
                             $grade = array_key_exists($curriculum_id."_".$strand_id."_".$config->subject_id."_".$config->semester_id."_".$config->period_id, $subjectgradeArr[$value["lrn"]]) ? $subjectgradeArr[$value["lrn"]][$curriculum_id."_".$strand_id."_".$config->subject_id."_".$config->semester_id."_".$config->period_id] : "";
                             $clonedWorksheet->setCellValue($config->cell_coordinate, $grade);
                             break;
                         case "trait":
-                            // block of code for trait grades
+                            // block of code for trait grade
+
+                            // if the lrn cannot be found on $traitgradeArr means no grades has been encoded yet.
+                            if(!in_array($value['lrn'], $traitgradeArr)) {
+                                break;
+                            }
+
                             $grade = array_key_exists($curriculum_id."_".$strand_id."_".$config->trait_id."_".$config->semester_id."_".$config->period_id, $traitgradeArr[$value["lrn"]]) ? $traitgradeArr[$value["lrn"]][$curriculum_id."_".$strand_id."_".$config->trait_id."_".$config->semester_id."_".$config->period_id] : "";
                             $clonedWorksheet->setCellValue($config->cell_coordinate, $grade);
                             break;
                         case "attendance":
+
+                            // if the lrn cannot be found on $attendanceArr means no value has been encoded.
+                            if(!in_array($value['lrn'], $attendanceArr)) {
+                                break;
+                            }
+
                             $attendance = array_key_exists($config->schoolyear_id."_".$config->schooldays_id."_".$config->attendance_type, $attendanceArr[$value['lrn']]) ? $attendanceArr[$value["lrn"]][$config->schoolyear_id."_".$config->schooldays_id."_".$config->attendance_type] : "";
                             $clonedWorksheet->setCellValue($config->cell_coordinate, $attendance);
                             break;
