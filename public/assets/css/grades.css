@@ -21,7 +21,8 @@
     color: #000;
 }
 .table-grades tbody tr input:focus {
-    color: #000;
+    color: #fff;
+    background: green;
 }
 .table-grades tbody tr input {
     color: #000;

@@ -69,15 +69,16 @@ svg {
     max-width: 110px;
     width: 100%;
 }
-.attendance-table tbody tr:hover input {
-    /* color: #fff; */
-}
 .attendance-table tbody tr:focus-within {
     background: green;
-    color: #fff;
+    color: #000;
 }
 .attendance-table tbody tr input:focus {
     color: #fff;
+    background: green;
+}
+.attendance-table tbody tr input {
+    color: #000;
 }
 .attendance-table tbody tr td {
     padding: 2px;

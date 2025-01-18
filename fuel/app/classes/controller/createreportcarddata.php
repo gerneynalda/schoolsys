@@ -60,41 +60,35 @@ class Controller_Createreportcarddata extends Controller_Rest
         $sql = "SELECT * FROM `traitgrades` WHERE `lrn` IN (".$LRNS.") AND `schoolyear_id`=".$schoolyear_id." AND `curriculum_id`=".$curriculum_id." AND `strand_id`=".$strand_id;
         $traitgrades = DB::query($sql)->as_object("Model_Traitgrade")->execute();
 
-        $subjectgradeArr = [];
-        foreach($subjectgrades as $item) {
-            if(!array_key_exists($item->lrn, $subjectgradeArr)) {
-                $subjectgradeArr[$item->lrn] = [];
-                $subjectgradeArr[$item->lrn][$curriculum_id."_".$strand_id."_".$item->subject_id."_".$item->semester_id."_".$item->period_id] = $item->grade;
-            }else {
-                $subjectgradeArr[$item->lrn][$curriculum_id."_".$strand_id."_".$item->subject_id."_".$item->semester_id."_".$item->period_id] = $item->grade;
-            }
-        }
-
-        // 
-        $traitgradeArr = [];
-        foreach($traitgrades as $item) {
-            if(!array_key_exists($item->lrn, $traitgradeArr)) {
-                $traitgradeArr[$item->lrn] = [];
-                $traitgradeArr[$item->lrn][$curriculum_id."_".$strand_id."_".$item->trait_id."_".$item->semester_id."_".$item->period_id] = $item->grade;
-            }else {
-                $traitgradeArr[$item->lrn][$curriculum_id."_".$strand_id."_".$item->trait_id."_".$item->semester_id."_".$item->period_id] = $item->grade;
-            }
-        }
-
         // get students attendance
         $sql = "SELECT * FROM `schoolyearmonthlyattendances` WHERE `lrn` IN (".$LRNS.") AND `schoolyear_id`=".$schoolyear_id;
         $studentAttendance = DB::query($sql)->as_object("Model_Schoolyearmonthlyattendance")->execute();
-
+        
+        // add the lrns as key to subjects, traits, attendances.
+        $subjectgradeArr = [];
+        $traitgradeArr = [];
         $attendanceArr = [];
+
+        // loop through lrn json; this are the selected lrns;
+        // initialize their value as empty array;
+        foreach($lrns as $lrn) {
+            $subjectGradeArr[$lrn] = [];
+            $traitgradeArr[$lrn] = [];
+            $attendanceArr[$lrn] =[];
+        }
+
+        // fill in grades from subjects for each lrn; given the curriculum_id, strand_id, subject_id, semester_id, and period_id;
+        foreach($subjectgrades as $item) {
+           $subjectgradeArr[$item->lrn][$curriculum_id."_".$strand_id."_".$item->subject_id."_".$item->semester_id."_".$item->period_id] = $item->grade;
+        }
+        // fill in grades from traits for each lrn; given the curriculum_id, strand_id, trait_id, semester_id, and period_id;
+        foreach($traitgrades as $item) {
+            $traitgradeArr[$item->lrn][$curriculum_id."_".$strand_id."_".$item->trait_id."_".$item->semester_id."_".$item->period_id] = $item->grade;
+        }
+        // fil in the attendance for each lrn; given the schoolyear_id, and values of days_present and days_taryd
         foreach($studentAttendance as $attendance) {
-            if(!array_key_exists($attendance->lrn, $attendanceArr)) {
-                $attendanceArr[$attendance->lrn] = [];
-                $attendanceArr[$attendance->lrn][$attendance->schoolyear_id."_".$attendance->schooldays_id."_days_present"] = $attendance->days_present;
-                $attendanceArr[$attendance->lrn][$attendance->schoolyear_id."_".$attendance->schooldays_id."_days_tardy"] = $attendance->days_tardy;
-            } else {
-                $attendanceArr[$attendance->lrn][$attendance->schoolyear_id."_".$attendance->schooldays_id."_days_present"] = $attendance->days_present;
-                $attendanceArr[$attendance->lrn][$attendance->schoolyear_id."_".$attendance->schooldays_id."_days_tardy"] = $attendance->days_tardy;
-            }
+            $attendanceArr[$attendance->lrn][$attendance->schoolyear_id."_".$attendance->schooldays_id."_days_present"] = $attendance->days_present;
+            $attendanceArr[$attendance->lrn][$attendance->schoolyear_id."_".$attendance->schooldays_id."_days_tardy"] = $attendance->days_tardy;
         }
 
         // load the reportcard template
@@ -140,30 +134,15 @@ class Controller_Createreportcarddata extends Controller_Rest
                             break;
                         case "subject":
                             // block of code for subject grades
-
-                            // if the lrn cannot be found on $subjectGradeArr means no grade has been encoded.
-
                             $grade = array_key_exists($curriculum_id."_".$strand_id."_".$config->subject_id."_".$config->semester_id."_".$config->period_id, $subjectgradeArr[$value["lrn"]]) ? $subjectgradeArr[$value["lrn"]][$curriculum_id."_".$strand_id."_".$config->subject_id."_".$config->semester_id."_".$config->period_id] : "";
                             $clonedWorksheet->setCellValue($config->cell_coordinate, $grade);
                             break;
                         case "trait":
                             // block of code for trait grade
-
-                            // if the lrn cannot be found on $traitgradeArr means no grades has been encoded yet.
-                            if(!in_array($value['lrn'], $traitgradeArr)) {
-                                break;
-                            }
-
                             $grade = array_key_exists($curriculum_id."_".$strand_id."_".$config->trait_id."_".$config->semester_id."_".$config->period_id, $traitgradeArr[$value["lrn"]]) ? $traitgradeArr[$value["lrn"]][$curriculum_id."_".$strand_id."_".$config->trait_id."_".$config->semester_id."_".$config->period_id] : "";
                             $clonedWorksheet->setCellValue($config->cell_coordinate, $grade);
                             break;
                         case "attendance":
-
-                            // if the lrn cannot be found on $attendanceArr means no value has been encoded.
-                            if(!in_array($value['lrn'], $attendanceArr)) {
-                                break;
-                            }
-
                             $attendance = array_key_exists($config->schoolyear_id."_".$config->schooldays_id."_".$config->attendance_type, $attendanceArr[$value['lrn']]) ? $attendanceArr[$value["lrn"]][$config->schoolyear_id."_".$config->schooldays_id."_".$config->attendance_type] : "";
                             $clonedWorksheet->setCellValue($config->cell_coordinate, $attendance);
                             break;
