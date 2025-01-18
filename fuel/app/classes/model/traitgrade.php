@@ -41,7 +41,7 @@ class Model_Traitgrade extends \Orm\Model
 		),
 		"grade" => array(
 			"label" => "Grade",
-			"data_type" => "int",
+			"data_type" => "varchar",
 		),
 		"created_at" => array(
 			"label" => "Created at",

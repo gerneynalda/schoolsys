@@ -21,11 +21,11 @@ class Model_Schoolyearmonthlyattendance extends \Orm\Model
 		),
 		"days_present" => array(
 			"label" => "Days present",
-			"data_type" => "int",
+			"data_type" => "varchar",
 		),
 		"days_tardy" => array(
 			"label" => "Days tardy",
-			"data_type" => "int",
+			"data_type" => "varchar",
 		),
 		"created_at" => array(
 			"label" => "Created at",

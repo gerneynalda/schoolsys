@@ -16,7 +16,7 @@ class Create_subjectgrades
 			'semester_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
 			'period_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
 			'subject_id' => array('constraint' => 11, 'null' => false, 'type' => 'int'),
-			'grade' => array('null' => false, 'type' => 'float'),
+			'grade' => array('constraint'=>10, 'null' => true, 'type' => 'varchar'),
 			'created_at' => array('constraint' => 11, 'null' => true, 'type' => 'int', 'unsigned' => true),
 			'updated_at' => array('constraint' => 11, 'null' => true, 'type' => 'int', 'unsigned' => true),
 		), array('id'));
