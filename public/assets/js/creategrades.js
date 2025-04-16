@@ -19,6 +19,12 @@ let downloadDialogUI = document.querySelector("#download-dialog-ui")
 let tableSubjectRow = document.querySelector("#table-subjects-row")
 let tableStudentsGradeRows = document.querySelector("#table-students-grade-row")
 
+let gradeCol = 0 // x length
+let gradeRow = 0 // y length
+
+let gradeXCoor = 1 // current x axis
+let gradeYCoor = 1 // current y axis
+
 // Subject|Traits Buttons - Top menu on the left;
 let showSubjectTableBtn = document.querySelector("#show-subject-grades-table-btn")
 let showTraitTableBtn = document.querySelector("#show-trait-grades-table-btn")
@@ -98,6 +104,10 @@ startQuery.addEventListener("click", async (e)=> {
         case 0:
 
             curriculumSubjects = await getCurriculumSubjects(queryIDS.curriculum_id, queryIDS.strand_id)
+            
+            // total number of subjects is total number columns
+            gradeCol = Object.keys(curriculumSubjects.data).length
+
             // subjects header
             for(let i in curriculumSubjects.data) {
                 if(curriculumSubjects.data[i].semester_id == queryIDS.semester_id){
@@ -110,6 +120,10 @@ startQuery.addEventListener("click", async (e)=> {
         case 1:
             
             curriculumTraits = await getCurriculumTraits(queryIDS.curriculum_id, queryIDS.strand_id)
+
+            // total number of traits is total number columns
+            gradeCol = Object.keys(curriculumTraits.data).length
+
             // traits header
             for(let i in curriculumTraits.data) {
                 if(curriculumTraits.data[i].semester_id == queryIDS.semester_id){
@@ -127,6 +141,10 @@ startQuery.addEventListener("click", async (e)=> {
     let tsgr = ""
     let totalStudents = Object.keys(students.data).length
     let tabIndex = 1
+
+    // totalStudents is the total number of row
+    gradeRow = totalStudents
+
     for(let i in students.data) {
         let ti = tabIndex
         tsgr += `<tr>`
@@ -172,7 +190,45 @@ tableStudentsGradeRows.addEventListener("keyup", async (e)=> {
             addNotificationToQeue("alert-danger", data.message)
         }
     }
+    //ArrowDown
+    if(e.keyCode == 40 && (gradeYCoor < gradeRow) ) {
+        console.log(gradeYCoor)
+        gradeYCoor++
+        
+        focusInput()
+    }
+    // ArrowRight
+    if(e.keyCode == 39 && (gradeXCoor < gradeCol)) {
+        console.log(gradeXCoor)
+        gradeXCoor++
+
+        focusInput()
+    }
+    //ArrowUp
+    if(e.keyCode == 38 && (gradeYCoor > 1)) {
+        console.log(gradeYCoor)
+        gradeYCoor--
+
+        focusInput()
+    }
+    // ArrowLeft
+    if(e.keyCode == 37 && (gradeXCoor > 1)) {
+        console.log(gradeXCoor)
+        gradeXCoor--
+
+        focusInput()
+    }
+    // Tab
+    if(e.keyCode == 9) {
+        gradeYCoor = document.activeElement.dataset.row
+        gradeXCoor = document.activeElement.dataset.col
+    }
 })
+
+function focusInput()
+{
+    document.querySelector(`#_${gradeYCoor}_${gradeXCoor}`).focus()
+}
 
 tableStudentsGradeRows.addEventListener("click", (e)=>{
 
@@ -186,9 +242,12 @@ tableStudentsGradeRows.addEventListener("click", (e)=>{
             let index = selectedLrns.indexOf(e.target.value)
             selectedLrns.splice(index,1)
         }
-
     }
 
+    if(e.target.nodeName == "INPUT") {
+        gradeYCoor = document.activeElement.dataset.row
+        gradeXCoor = document.activeElement.dataset.col
+    }
 })
 
 // selectAllStudents.addEventListener("click", (e)=>{
@@ -288,25 +347,28 @@ async function studentSubjectsGradeUI(lrn, subjectsarr, schoolyearid, semesterid
     
     let inputGrades = ""
     let ti = tabindex
+    let row = tabindex
+    let col = 1
     let color = ''
 
     if(tabbingCheckbox.checked) {
 
         for(let i in subjectsarr) {
             color = result.data.hasOwnProperty(subjectsarr[i]) ? '' : "style='background: #ff000040';"
-            inputGrades += result.data.hasOwnProperty(subjectsarr[i]) ? `<td><input class="form-control" type="text" ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="${result.data[subjectsarr[i]].grade}" maxlength="8" size="8" /></td>` : `<td><input class="form-control" type="text" ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="" maxlength="8" size="8"/></td>`
+            inputGrades += result.data.hasOwnProperty(subjectsarr[i]) ? `<td><input class="form-control" type="text" id="_${row}_${col}" data-row="${row}" data-col="${col}" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="${result.data[subjectsarr[i]].grade}" maxlength="8" size="8" /></td>` : `<td><input class="form-control" type="text" id="_${row}_${col}" data-row="${row}" data-col="${col}" ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="" maxlength="8" size="8"/></td>`
             ti += totalStudents
+            col++
         }
 
-    } else {
+    } //else {
 
-        for(let i in subjectsarr) {
-            color = result.data.hasOwnProperty(subjectsarr[i]) ? '' : "style='background: #ff000040';"
-            inputGrades += result.data.hasOwnProperty(subjectsarr[i]) ? `<td><input class="form-control" type="text" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="${result.data[subjectsarr[i]].grade}" maxlength="8" size="8" /></td>` : `<td><input class="form-control" type="text" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="" maxlength="8" size="8"/></td>`
-            ti += totalStudents
-        }
+    //     for(let i in subjectsarr) {
+    //         color = result.data.hasOwnProperty(subjectsarr[i]) ? '' : "style='background: #ff000040';"
+    //         inputGrades += result.data.hasOwnProperty(subjectsarr[i]) ? `<td><input class="form-control" type="text" id="_${row}${col}" data-row="${row}" data-col="${col}" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="${result.data[subjectsarr[i]].grade}" maxlength="8" size="8" /></td>` : `<td><input class="form-control" type="text" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="" maxlength="8" size="8"/></td>`
+    //         ti += totalStudents
+    //     }
 
-    }
+    // }
 
     return inputGrades
 }
@@ -318,11 +380,14 @@ async function studentTraitsGradeUI(lrn, traitsarr, schoolyearid, semesterid, pe
     
     let inputGrades = ""
     let ti = tabindex
+    let row = tabindex
+    let col = 1
     let color = ''
     for(let i in traitsarr) {
         color = result.data.hasOwnProperty(traitsarr[i]) ? '' : "style='background: #ff000040';"
-        inputGrades += result.data.hasOwnProperty(traitsarr[i]) ? `<td><input class="form-control" type="text" ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-traitid=${traitsarr[i]} value="${result.data[traitsarr[i]].grade}" maxlength="8" size="8" /></td>` : `<td><input class="form-control" type="text"  ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-traitid=${traitsarr[i]} value="" maxlength="8" size="8"/></td>`
+        inputGrades += result.data.hasOwnProperty(traitsarr[i]) ? `<td><input class="form-control" type="text" id="_${row}_${col}" data-row="${row}" data-col="${col}" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-traitid=${traitsarr[i]} value="${result.data[traitsarr[i]].grade}" maxlength="8" size="8" /></td>` : `<td><input class="form-control" type="text"  id="_${row}_${col}" data-row="${row}" data-col="${col}" ${color} tabindex="${ti}" data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-traitid=${traitsarr[i]} value="" maxlength="8" size="8"/></td>`
         ti += totalStudents
+        col++
     }
 
     return inputGrades
