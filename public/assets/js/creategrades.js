@@ -189,6 +189,32 @@ tableStudentsGradeRows.addEventListener("keyup", async (e)=> {
             // notify
             addNotificationToQeue("alert-danger", data.message)
         }
+
+
+        gradeXCoor++
+        if(gradeXCoor <= gradeCol ) {
+            console.log("diri gid")
+            focusInput()
+        }
+        if(gradeXCoor > gradeCol && gradeYCoor < gradeRow) {
+            gradeXCoor = 1
+            gradeYCoor++
+            console.log("diri nag sulod")
+            focusInput()
+            
+        }
+        console.log(gradeYCoor)
+        console.log(gradeXCoor)
+        // if on lower right end input transfer to upper left end input
+        if(gradeXCoor > gradeCol && gradeYCoor >= gradeRow) {
+            gradeYCoor = 1
+            gradeXCoor = 1
+            console.log("indi diri")
+            console.log(gradeYCoor)
+            console.log(gradeXCoor)
+            focusInput()
+        }
+        
     }
     //ArrowDown
     if(e.keyCode == 40 && (gradeYCoor < gradeRow) ) {
