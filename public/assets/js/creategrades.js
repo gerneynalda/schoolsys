@@ -5,8 +5,8 @@ let strandOptionsInput = document.querySelector("#select-strand-dropdown")
 let semesterOptionsInput = document.querySelector("#select-semester-dropdown")
 let periodOptionsInput = document.querySelector("#select-period-dropdown")
 let startQuery = document.querySelector("#start-query")
-let tabbingCheckbox = document.querySelector("#toggle-tabbing")
-let tabbingDescription = document.querySelector("#tabbing-description")
+// let tabbingCheckbox = document.querySelector("#toggle-tabbing")
+// let tabbingDescription = document.querySelector("#tabbing-description")
 
 // let generateReportCardBtn = document.querySelector("#generate-report-card")
 // let selectAllStudents = document.querySelector("#select-all-students")
@@ -193,25 +193,18 @@ tableStudentsGradeRows.addEventListener("keyup", async (e)=> {
 
         gradeXCoor++
         if(gradeXCoor <= gradeCol ) {
-            console.log("diri gid")
             focusInput()
         }
         if(gradeXCoor > gradeCol && gradeYCoor < gradeRow) {
             gradeXCoor = 1
             gradeYCoor++
-            console.log("diri nag sulod")
             focusInput()
             
         }
-        console.log(gradeYCoor)
-        console.log(gradeXCoor)
         // if on lower right end input transfer to upper left end input
         if(gradeXCoor > gradeCol && gradeYCoor >= gradeRow) {
             gradeYCoor = 1
             gradeXCoor = 1
-            console.log("indi diri")
-            console.log(gradeYCoor)
-            console.log(gradeXCoor)
             focusInput()
         }
         
@@ -220,7 +213,7 @@ tableStudentsGradeRows.addEventListener("keyup", async (e)=> {
     if(e.keyCode == 40 && (gradeYCoor < gradeRow) ) {
         console.log(gradeYCoor)
         gradeYCoor++
-        
+
         focusInput()
     }
     // ArrowRight
@@ -343,19 +336,19 @@ closeDialogBtn.addEventListener("click", (e)=>{
 })
 
 // Tabbing Toggle
-tabbingCheckbox.addEventListener("click", (e)=> {
+// tabbingCheckbox.addEventListener("click", (e)=> {
 
-    if(e.target.checked) {
+//     if(e.target.checked) {
 
-        tabbingDescription.value = "Vertical Tabbing"
+//         tabbingDescription.value = "Vertical Tabbing"
 
-    } else {
+//     } else {
 
-        tabbingDescription.value = "Horizontal Tabbing"
+//         tabbingDescription.value = "Horizontal Tabbing"
 
-    }
+//     }
 
-})
+// })
 
 function removeFromSelectedLRN(lrn) 
 {
@@ -377,7 +370,7 @@ async function studentSubjectsGradeUI(lrn, subjectsarr, schoolyearid, semesterid
     let col = 1
     let color = ''
 
-    if(tabbingCheckbox.checked) {
+    // if(tabbingCheckbox.checked) {
 
         for(let i in subjectsarr) {
             color = result.data.hasOwnProperty(subjectsarr[i]) ? '' : "style='background: #ff000040';"
@@ -386,14 +379,13 @@ async function studentSubjectsGradeUI(lrn, subjectsarr, schoolyearid, semesterid
             col++
         }
 
-    } //else {
-
+    // } 
+    //else {
     //     for(let i in subjectsarr) {
     //         color = result.data.hasOwnProperty(subjectsarr[i]) ? '' : "style='background: #ff000040';"
     //         inputGrades += result.data.hasOwnProperty(subjectsarr[i]) ? `<td><input class="form-control" type="text" id="_${row}${col}" data-row="${row}" data-col="${col}" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="${result.data[subjectsarr[i]].grade}" maxlength="8" size="8" /></td>` : `<td><input class="form-control" type="text" ${color} data-lrn=${lrn} data-schoolyear=${schoolyearid} data-semester=${semesterid} data-period=${periodid} data-subjectid=${subjectsarr[i]} value="" maxlength="8" size="8"/></td>`
     //         ti += totalStudents
     //     }
-
     // }
 
     return inputGrades
