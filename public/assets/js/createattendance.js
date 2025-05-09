@@ -3,7 +3,7 @@ let classDropdown = document.querySelector("#select-class-dropdown")
 let getAttendanceBtn = document.querySelector("#get-attendance-btn")
 
 let monthlyAttendanceBtn = document.querySelector("#show-monthly-attendance-table-btn")
-let dailyAttendanceBtn = document.querySelector("#show-daily-attendance-table-btn")
+// let dailyAttendanceBtn = document.querySelector("#show-daily-attendance-table-btn")
 
 let daysPresentBtn = document.querySelector("#show-days-present-inputs-btn")
 let daysTardyBtn = document.querySelector("#show-days-tardy-inputs-btn")
@@ -13,7 +13,18 @@ let attendanceTable = document.querySelector("#attendance-table")
 let loader = document.querySelector("#loader")
 
 // total number of students in a class
+// this is also the total number of rows
 let totalStudents = 0;
+let totalRows = 0
+
+// total number of months
+// total number of cols
+let totalCols = 0
+let tableheaders = 0
+
+// Input field initial coordinate
+let currentRow = 0
+let currentCol = 0
 
 // attendance type
 let attendanceType = 1; // 1 present | 0 tardy
@@ -25,22 +36,22 @@ monthlyAttendanceBtn.addEventListener("click", (e)=>{
 
     // add active class to indicate which button or operation is currently operation
     e.target.classList.add('active')
-    dailyAttendanceBtn.classList.remove('active')
+    // dailyAttendanceBtn.classList.remove('active')
 
     // empty table
     attendanceTable.innerHTML = ''
 
 })
-dailyAttendanceBtn.addEventListener("click", (e)=>{
+// dailyAttendanceBtn.addEventListener("click", (e)=>{
 
-    // add active class to indicate which button or operation is currently operation
-    e.target.classList.add('active')
-    monthlyAttendanceBtn.classList.remove('active')
+//     // add active class to indicate which button or operation is currently operation
+//     e.target.classList.add('active')
+//     monthlyAttendanceBtn.classList.remove('active')
 
-    // empty table
-    attendanceTable.innerHTML = ''
+//     // empty table
+//     attendanceTable.innerHTML = ''
 
-})
+// })
 
 daysPresentBtn.addEventListener("click", (e)=>{
 
@@ -92,6 +103,8 @@ getAttendanceBtn.addEventListener("click", async (e) => {
     let studentclass = await getSchoolyearClassStudentList(class_id, schoolyear_id)
 
     totalStudents = studentclass.data.length
+    totalRows = studentclass.data.length
+
     if(studentclass.data.length <= 0) {
         // hide loader
         loader.setAttribute("style","display:none;")
@@ -112,14 +125,23 @@ getAttendanceBtn.addEventListener("click", async (e) => {
     }
 
     // get school days
-    let tableheaders = await getSchoolyearSchoolDays(schoolyear_id)
+    tableheaders = await getSchoolyearSchoolDays(schoolyear_id)
+    totalCols = tableheaders.data.length
+
     // tabulate data
     await updateAttendanceTableContent(studentclass.data, tableheaders.data)
     // hide loader
     loader.setAttribute("style","display:none;")
 
+    // set the currentRow and currentCol to 1 and focus on the first input
+    if(studentclass.data.length > 0) {
+        currentCol = 1
+        currentRow = 1
+        focusInput()
+    }
 })
 
+// 
 attendanceTable.addEventListener("keyup", async (e) => {
 
     if(e.target.classList.contains('form-control') && (e.key === 'Enter' || e.keyCode === 13)) {
@@ -155,12 +177,39 @@ attendanceTable.addEventListener("keyup", async (e) => {
 
         }
 
+        // move to next input
+        currentCol++
+        console.log(currentRow)
+        console.log(currentCol)
+        if(currentCol <= totalCols) {
+            focusInput()
+        }
+        if(currentCol > totalCols && currentRow < totalRows) {
+            currentCol = 1
+            currentRow++
+            focusInput()
+        }
+        // if at the end of inputs return to the first input
+        if(currentCol > totalCols && currentRow >= totalRows) {
+            currentCol = 1
+            currentRow = 1
+            focusInput()
+        }
     }
 
 })
 
+attendanceTable.addEventListener("click", (e) => {
+    if(e.target.nodeName == "INPUT") {
+        currentCol = document.activeElement.dataset.col
+        currentRow = document.activeElement.dataset.row
+    }
+})
+
 async function updateAttendanceTableContent(student, headers)
 {   
+    console.log(headers.length)
+    console.log(student.length)
     let header_rows = `<thead><tr><th>Name</th>`
     let input_fields = ''
     let months = []
@@ -172,27 +221,29 @@ async function updateAttendanceTableContent(student, headers)
     header_rows += '</tr></thead>'
 
     let rows = `<tbody>`
-    let tabNo = 1
+
+    let rowNo = 1
+    
     for(let i in student) {
         rows += `<tr><td>${student[i].lastname}, ${student[i].firstname} ${student[i].middlename} ${student[i].suffix}</td>`
         
-        rows += attendanceType ? await tabulateMonthlyAttendance(student[i].lrn, schoolyearDropdown.value, months, "days_present", tabNo) : await tabulateMonthlyAttendance(student[i].lrn, schoolyearDropdown.value, months, "days_tardy", tabNo) 
+        rows += attendanceType ? await tabulateMonthlyAttendance(student[i].lrn, schoolyearDropdown.value, months, "days_present", rowNo) : await tabulateMonthlyAttendance(student[i].lrn, schoolyearDropdown.value, months, "days_tardy", rowNo) 
 
         rows += `</tr>`
 
-        tabNo++
+        rowNo++
     }
     rows += `</tbody>`
 
     attendanceTable.innerHTML = header_rows+=rows
 }
 
-async function tabulateMonthlyAttendance(lrn, schoolyear, months, type, tabIndex)
+async function tabulateMonthlyAttendance(lrn, schoolyear, months, type, row)
 {
 
     let result = await getMonthlyAttendance(lrn, schoolyear, months)
     let data = ''
-    let index = tabIndex
+    let col = 1
 
     for(let i in months) {
         let color = ''
@@ -202,19 +253,19 @@ async function tabulateMonthlyAttendance(lrn, schoolyear, months, type, tabIndex
             value = result.data[months[i]][type] != null ? result.data[months[i]][type] : ''
             color = result.data[months[i]][type] != null ? '' : "style='background: #ff000040';"
 
-            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-id="${result.data[months[i]].id}" value="${value}" /></td>`
+            data += `<td><input type="text" placeholder="" ${color} class="form-control" data-id="${result.data[months[i]].id}" value="${value}" data-row="${row}" data-col="${col}" id="_${row}_${col}" /></td>`
 
         }else {
             color = 'style="background: #ff000040";'
-            data += `<td><input type="text" placeholder="" ${color} tabIndex=${index} class="form-control" data-lrn="${lrn}" data-schoolyearid="${schoolyear}" data-schooldaysid="${months[i]}" value="" /></td>`
+            data += `<td><input type="text" placeholder="" ${color} class="form-control" data-lrn="${lrn}" data-schoolyearid="${schoolyear}" data-schooldaysid="${months[i]}" value="" data-row="${row}" data-col="${col}" id="_${row}_${col}" /></td>`
         }
         
-        index += totalStudents
+        col++
     }
 
     return data
 }
 
-window.addEventListener("load", (e)=>{
-
-})
+function focusInput() {
+    attendanceTable.querySelector(`#_${currentRow}_${currentCol}`).focus()
+}
