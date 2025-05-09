@@ -40,8 +40,8 @@ btn_ShowStudents.addEventListener("click", async (e)=>{
     table_student_list.innerHTML = ""
 
     // query for a list of students 
-    let result = await getSchoolyearClassStudentList(class_id,schoolyear_id)
-
+    let result = await getSchoolyearClassStudentList(class_id,schoolyear_id)    
+    console.log(result.data)
     if(Object.keys(result.data).length <= 0) {
         // loader hide
         loader.setAttribute("style", "display:none;")

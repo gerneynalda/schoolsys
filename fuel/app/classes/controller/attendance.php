@@ -64,9 +64,9 @@ class Controller_Attendance extends Controller_Template
 		// show subject grades table or trait grades table
 		$custom_menu .= '<div class="btn-group navbar-form navbar-left" role="group" aria-label="...">
 		<button type="button" class="btn btn-primary btn-sm active" id="show-monthly-attendance-table-btn">Monthly Attendance</button>
-		<button type="button" class="btn btn-primary btn-sm" id="show-daily-attendance-table-btn">Daily Attendance</button>
+	
 		</div>';
-
+		// 	<button type="button" class="btn btn-primary btn-sm" id="show-daily-attendance-table-btn">Daily Attendance</button>
 		// days tardy inputs | days present inputs
 		$custom_menu .= '<div class="btn-group navbar-form navbar-left" role="group" aria-label="...">
 		<button type="button" class="btn btn-primary btn-sm active" id="show-days-present-inputs-btn">Present</button>
