@@ -134,16 +134,25 @@ class Controller_Createreportcarddata extends Controller_Rest
                             break;
                         case "subject":
                             // block of code for subject grades
-                            $grade = array_key_exists($curriculum_id."_".$strand_id."_".$config->subject_id."_".$config->semester_id."_".$config->period_id, $subjectgradeArr[$value["lrn"]]) ? $subjectgradeArr[$value["lrn"]][$curriculum_id."_".$strand_id."_".$config->subject_id."_".$config->semester_id."_".$config->period_id] : "";
+                            $grade = "";
+                            if(array_key_exists($value["lrn"], $subjectgradeArr)) {
+                                $grade = array_key_exists($curriculum_id."_".$strand_id."_".$config->subject_id."_".$config->semester_id."_".$config->period_id, $subjectgradeArr[$value["lrn"]]) ? $subjectgradeArr[$value["lrn"]][$curriculum_id."_".$strand_id."_".$config->subject_id."_".$config->semester_id."_".$config->period_id] : "";
+                            }
                             $clonedWorksheet->setCellValue($config->cell_coordinate, $grade);
                             break;
                         case "trait":
                             // block of code for trait grade
-                            $grade = array_key_exists($curriculum_id."_".$strand_id."_".$config->trait_id."_".$config->semester_id."_".$config->period_id, $traitgradeArr[$value["lrn"]]) ? $traitgradeArr[$value["lrn"]][$curriculum_id."_".$strand_id."_".$config->trait_id."_".$config->semester_id."_".$config->period_id] : "";
+                            $grade = "";
+                            if(array_key_exists($value["lrn"], $traitgradeArr)) {
+                                $grade = array_key_exists($curriculum_id."_".$strand_id."_".$config->trait_id."_".$config->semester_id."_".$config->period_id, $traitgradeArr[$value["lrn"]]) ? $traitgradeArr[$value["lrn"]][$curriculum_id."_".$strand_id."_".$config->trait_id."_".$config->semester_id."_".$config->period_id] : "";
+                            }
                             $clonedWorksheet->setCellValue($config->cell_coordinate, $grade);
                             break;
                         case "attendance":
-                            $attendance = array_key_exists($config->schoolyear_id."_".$config->schooldays_id."_".$config->attendance_type, $attendanceArr[$value['lrn']]) ? $attendanceArr[$value["lrn"]][$config->schoolyear_id."_".$config->schooldays_id."_".$config->attendance_type] : "";
+                            $attendance = "";
+                            if(array_key_exists($value["lrn"], $attendanceArr)){
+                                $attendance = array_key_exists($config->schoolyear_id."_".$config->schooldays_id."_".$config->attendance_type, $attendanceArr[$value['lrn']]) ? $attendanceArr[$value["lrn"]][$config->schoolyear_id."_".$config->schooldays_id."_".$config->attendance_type] : "";
+                            }
                             $clonedWorksheet->setCellValue($config->cell_coordinate, $attendance);
                             break;
                         default:
