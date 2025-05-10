@@ -179,8 +179,6 @@ attendanceTable.addEventListener("keyup", async (e) => {
 
         // move to next input
         currentCol++
-        console.log(currentRow)
-        console.log(currentCol)
         if(currentCol <= totalCols) {
             focusInput()
         }
@@ -234,8 +232,6 @@ attendanceTable.addEventListener("click", (e) => {
 
 async function updateAttendanceTableContent(student, headers)
 {   
-    console.log(headers.length)
-    console.log(student.length)
     let header_rows = `<thead><tr><th>Name</th>`
     let input_fields = ''
     let months = []

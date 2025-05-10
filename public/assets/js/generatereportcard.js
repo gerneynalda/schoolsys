@@ -41,7 +41,7 @@ btn_ShowStudents.addEventListener("click", async (e)=>{
 
     // query for a list of students 
     let result = await getSchoolyearClassStudentList(class_id,schoolyear_id)    
-    console.log(result.data)
+
     if(Object.keys(result.data).length <= 0) {
         // loader hide
         loader.setAttribute("style", "display:none;")
@@ -153,14 +153,11 @@ btn_generateReportCard.addEventListener("click", async (e) => {
     // show loader
     loader.setAttribute("style","display:flex;")
 
-    console.log(typeof dropdown_schoolyear.value)
-
     if(lrns.length <= 0) {
         addNotificationToQeue("alert-warning", "Please select student(s)")
         loader.setAttribute("style","display:none;")
         return false
     }
-
     let result = await generateReportCard(dropdown_schoolyear.value, dropdown_class.value, dropdown_curriculum.value, dropdown_strand.value, lrns)
 
     if(result.success) {
