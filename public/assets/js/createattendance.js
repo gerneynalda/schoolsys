@@ -197,6 +197,32 @@ attendanceTable.addEventListener("keyup", async (e) => {
         }
     }
 
+    //ArrowDown
+    if(e.keyCode == 40 && (currentRow < totalRows) ) {
+        currentRow++
+        focusInput()
+    }
+    // ArrowRight
+    if(e.keyCode == 39 && (currentCol < totalCols)) {
+        currentCol++
+        focusInput()
+    }
+    //ArrowUp
+    if(e.keyCode == 38 && (currentRow > 1)) {
+        currentRow--
+        focusInput()
+    }
+    // ArrowLeft
+    if(e.keyCode == 37 && (currentCol > 1)) {
+        currentCol--
+        focusInput()
+    }
+    // Tab
+    if(e.keyCode == 9) {
+        currentRow = document.activeElement.dataset.row
+        currentCol = document.activeElement.dataset.col
+    }
+
 })
 
 attendanceTable.addEventListener("click", (e) => {
