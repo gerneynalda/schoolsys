@@ -16,6 +16,7 @@ html, body {
 
     padding-top: 60px;
     padding-bottom: 15px;
+    padding-left: 50px;
 }
 
 /* General Menu Styles */
@@ -204,4 +205,29 @@ html, body {
 /* STUDENT LIST STYLES */
 .student-photo img {
     width: 100%;
+}
+
+/* New General Menu Styles */
+.general-menu {
+    position: fixed;
+    top: 51px;
+    height: 100%;
+    background: #222;
+    border-color: #080808;
+}
+.general-menu a {
+    color: #fff;
+    font-size: 0;
+}
+.general-menu a:hover {
+    color: #000;
+}
+.general-menu a svg {
+    font-size: 16px;
+}
+.general-menu.show-text a {
+    font-size: 16px;
+}
+.main-wrapper.show-nav-text {
+    padding-left: 140px;
 }

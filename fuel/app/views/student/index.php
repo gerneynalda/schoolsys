@@ -1,25 +1,9 @@
-<section class="col-md-2">
-	<!-- Search & Filter -->
-	 <div class="panel panel-primary">
-		<div class="panel-heading">
-			<h3 class="panel-title">Search Students</h3>
-		</div>
-		<div class="panel-body">
-			<div class="form-group">
-				<input type="text" class="form-control" name="name" placeholder="Name" />
-			</div>
-		</div>
-		<div class="panel-footer">
-			<button class="btn btn-primary btn-md">Find</button>
-		</div>
-	 </div>
-</section>
-<section class="col-md-10">
+<section class="col-md-12">
 	<?php if ($students): ?>
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr style="background:green; color:white;">
-					<th style="width:80px;"></th>
+					<!-- <th style="width:80px;"></th> -->
 					<th>Lrn</th>
 					<th>Lastname</th>
 					<th>Firstname</th>
@@ -34,9 +18,9 @@
 			<tbody>
 				<?php foreach ($students as $student): ?>		
 				<tr>
-					<td class="student-photo">
-						<?php echo Asset::img("default_01.jpg"); ?>
-					</td>
+					<!-- <td class="student-photo">
+						<?php //echo Asset::img("default_01.jpg"); ?>
+					</td> -->
 					<td><?php echo $student->lrn; ?></td>
 					<td><?php echo $student->lastname; ?></td>
 					<td><?php echo $student->firstname; ?></td>
