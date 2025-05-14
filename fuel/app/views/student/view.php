@@ -1,12 +1,12 @@
 <section class="col-md-9 col-md-offset-1 student-details">
 
-	<section class="col-md-3 photo-column">
+	<!-- <section class="col-md-3 photo-column"> -->
 
 		<!-- Photo Column -->
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-12">
 				<div class="thumbnail">
-				<?php echo Asset::img('default.jpg'); ?>
+				<?php //echo Asset::img('default.jpg'); ?>
 					<div class="caption">
 						<p>Awards</p>
 						<div class="btn-group">
@@ -16,11 +16,11 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-	</section>
+	<!-- </section> -->
 
-	<section class="col-md-9 details-column">
+	<section class="col-md-12 details-column">
 
 		<div class="col-md-2">
 			<!-- Start of Navigation -->

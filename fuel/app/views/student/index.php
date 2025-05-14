@@ -32,7 +32,7 @@
 					<td>
 						<div class="btn-toolbar">
 							<div class="btn-group">
-								<?php echo Html::anchor('student/view/'.$student->id, '<i class="fa-solid fa-eye"></i>', array('class' => 'btn btn-default btn-sm', 'target'=>"_blank")); ?>
+								<?php //echo Html::anchor('student/view/'.$student->id, '<i class="fa-solid fa-eye"></i>', array('class' => 'btn btn-default btn-sm', 'target'=>"_blank")); ?>
 								<?php echo Html::anchor('student/edit/'.$student->id, '<i class="fa-solid fa-pen-to-square"></i>', array('class' => 'btn btn-default btn-sm')); ?>							
 							</div>
 						</div>
