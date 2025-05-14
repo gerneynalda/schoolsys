@@ -31,6 +31,12 @@
 
 						<?php endif;?>
 						
+						<?php if(Session::get_flash('success')): ?>
+							<div class="alert alert-success">
+								<p><strong><?php echo Session::get_flash('success') ?></strong></p>
+							</div>
+						<?php endif; ?>
+						
 						<!-- Login Form -->
 						<?php echo Form::open("authenticate/userLoggedIn") ?>
 
