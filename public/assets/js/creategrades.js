@@ -191,23 +191,40 @@ tableStudentsGradeRows.addEventListener("keyup", async (e)=> {
         }
 
 
-        gradeXCoor++
-        if(gradeXCoor <= gradeCol ) {
+        // gradeXCoor++
+        // if(gradeXCoor <= gradeCol ) {
+        //     focusInput()
+        // }
+        // if(gradeXCoor > gradeCol && gradeYCoor < gradeRow) {
+        //     gradeXCoor = 1
+        //     gradeYCoor++
+        //     focusInput()
+            
+        // }
+        // // if on lower right end input transfer to upper left end input
+        // if(gradeXCoor > gradeCol && gradeYCoor >= gradeRow) {
+        //     gradeYCoor = 1
+        //     gradeXCoor = 1
+        //     focusInput()
+        // }
+        
+        gradeYCoor++
+        if(gradeYCoor <= gradeRow) {
             focusInput()
         }
-        if(gradeXCoor > gradeCol && gradeYCoor < gradeRow) {
-            gradeXCoor = 1
-            gradeYCoor++
+
+        if(gradeYCoor > gradeRow && gradeXCoor < gradeCol) {
+            gradeYCoor = 1
+            gradeXCoor++
             focusInput()
             
         }
-        // if on lower right end input transfer to upper left end input
-        if(gradeXCoor > gradeCol && gradeYCoor >= gradeRow) {
-            gradeYCoor = 1
+
+        if(gradeYCoor > gradeRow && gradeXCoor >= gradeCol) {
             gradeXCoor = 1
+            gradeYCoor = 1
             focusInput()
         }
-        
     }
     //ArrowDown
     if(e.keyCode == 40 && (gradeYCoor < gradeRow) ) {

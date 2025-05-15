@@ -5,7 +5,7 @@ let notificationLimit = 3
 function addNotificationToQeue(type, message) {
 
     // addNotificationToQeue("alert-success","Test message to be removed");
-    systemNotificationListUI.insertAdjacentHTML("beforeend", `<div class="alert ${type}"><i class="fa-solid fa-note-sticky"></i> <strong>${message}</strong></div>`)
+    systemNotificationListUI.insertAdjacentHTML("beforeend", `<div class="alert ${type}" style="opacity:0.7;"><i class="fa-solid fa-note-sticky"></i> <strong>${message}</strong></div>`)
     removeNotificationFromQeue()
 }
 // remove notification from the systemNotificationListUI

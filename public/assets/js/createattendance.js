@@ -178,19 +178,35 @@ attendanceTable.addEventListener("keyup", async (e) => {
         }
 
         // move to next input
-        currentCol++
-        if(currentCol <= totalCols) {
+        // currentCol++
+        // if(currentCol <= totalCols) {
+        //     focusInput()
+        // }
+        // if(currentCol > totalCols && currentRow < totalRows) {
+        //     currentCol = 1
+        //     currentRow++
+        //     focusInput()
+        // }
+        // // if at the end of inputs return to the first input
+        // if(currentCol > totalCols && currentRow >= totalRows) {
+        //     currentCol = 1
+        //     currentRow = 1
+        //     focusInput()
+        // }
+
+        currentRow++
+        if(currentRow <= totalRows) {
             focusInput()
         }
-        if(currentCol > totalCols && currentRow < totalRows) {
-            currentCol = 1
-            currentRow++
+        if(currentRow > totalRows && currentCol < totalCols) {
+            currentRow = 1
+            currentCol++
             focusInput()
         }
         // if at the end of inputs return to the first input
-        if(currentCol > totalCols && currentRow >= totalRows) {
-            currentCol = 1
+        if(currentRow > totalRows && currentCol >= totalCols) {
             currentRow = 1
+            currentCol = 1
             focusInput()
         }
     }

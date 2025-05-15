@@ -11,12 +11,11 @@
 	<main class="container-fluid">
 		<section class="row">
 			<div class="col-md-4 col-md-offset-4">
-				
 				<div class="panel panel-primary">
 					<div class="panel-heading">Login</div>
 					<div class="panel-body">
 						<?php if(isset($error_message)) :?>
-
+						
 							<div class="alert alert-danger">
 								<p><i class="fa-solid fa-warning"></i> <?php echo $error_message; ?></p>
 							</div>
