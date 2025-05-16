@@ -44,7 +44,7 @@ class Controller_Createreportcarddata extends Controller_Rest
         $teachers = DB::query($sql)->execute()->as_array('empuid');
 
         // get student details
-        $sql = "SELECT * FROM `students` WHERE `lrn` IN (".$LRNS.") ORDER BY `students`.`gender` DESC, `students`.`lastname` ASC";
+        $sql = "SELECT * FROM `students` WHERE `lrn` IN (".$LRNS.") ORDER BY `students`.`gender` DESC, `students`.`lastname` ASC, `students`.`firstname` ASC";
         $students = DB::query($sql)->execute()->as_array("lrn");
 
         // get reportcard template configuration
