@@ -5,16 +5,13 @@ let strandOptionsInput = document.querySelector("#select-strand-dropdown")
 let semesterOptionsInput = document.querySelector("#select-semester-dropdown")
 let periodOptionsInput = document.querySelector("#select-period-dropdown")
 let startQuery = document.querySelector("#start-query")
-// let tabbingCheckbox = document.querySelector("#toggle-tabbing")
-// let tabbingDescription = document.querySelector("#tabbing-description")
-
-// let generateReportCardBtn = document.querySelector("#generate-report-card")
-// let selectAllStudents = document.querySelector("#select-all-students")
-// let selectedAll = true
-// let selectedLrns = []
 
 let closeDialogBtn = document.querySelector("#close-download-dialog-modal")
 let downloadDialogUI = document.querySelector("#download-dialog-ui")
+
+let inputSwitchDirectionBtn = document.querySelector("#input-switching-direction");
+// 0 vertical, 1 horizontal
+let switchDirection = 0
 
 let tableSubjectRow = document.querySelector("#table-subjects-row")
 let tableStudentsGradeRows = document.querySelector("#table-students-grade-row")
@@ -73,6 +70,32 @@ semesterOptionsInput.addEventListener("change", (e)=> {
 
 periodOptionsInput.addEventListener("change", (e)=> {
     queryIDS.period_id = e.target.value
+})
+
+inputSwitchDirectionBtn.addEventListener('click', (e) => {
+    
+    switch(switchDirection) {
+        case 0:
+            // change from vertical to horizontal
+            switchDirection = 1
+            // change icon
+            inputSwitchDirectionBtn.innerHTML = '<i class="glyphicon glyphicon-arrow-right"></i>'
+            // change btn color
+            inputSwitchDirectionBtn.classList.remove('btn-primary')
+            inputSwitchDirectionBtn.classList.add('btn-warning')
+            break
+        case 1:
+            // change from horizontal to vertical
+            switchDirection = 0
+            inputSwitchDirectionBtn.innerHTML = '<i class="glyphicon glyphicon-arrow-down"></i>'
+            // change btn color
+            inputSwitchDirectionBtn.classList.remove('btn-warning')
+            inputSwitchDirectionBtn.classList.add('btn-primary')
+            break
+        default:
+            break
+    }
+
 })
 
 startQuery.addEventListener("click", async (e)=> {
@@ -189,42 +212,53 @@ tableStudentsGradeRows.addEventListener("keyup", async (e)=> {
             // notify
             addNotificationToQeue("alert-danger", data.message)
         }
-
-
-        // gradeXCoor++
-        // if(gradeXCoor <= gradeCol ) {
-        //     focusInput()
-        // }
-        // if(gradeXCoor > gradeCol && gradeYCoor < gradeRow) {
-        //     gradeXCoor = 1
-        //     gradeYCoor++
-        //     focusInput()
-            
-        // }
-        // // if on lower right end input transfer to upper left end input
-        // if(gradeXCoor > gradeCol && gradeYCoor >= gradeRow) {
-        //     gradeYCoor = 1
-        //     gradeXCoor = 1
-        //     focusInput()
-        // }
         
-        gradeYCoor++
-        if(gradeYCoor <= gradeRow) {
-            focusInput()
-        }
+        // switchingDirection
+        if(switchDirection) {
 
-        if(gradeYCoor > gradeRow && gradeXCoor < gradeCol) {
-            gradeYCoor = 1
+            // switching direction = 1
+            // horizontal
             gradeXCoor++
-            focusInput()
-            
-        }
+            if(gradeXCoor <= gradeCol) {
+                focusInput()
+            }
 
-        if(gradeYCoor > gradeRow && gradeXCoor >= gradeCol) {
-            gradeXCoor = 1
-            gradeYCoor = 1
-            focusInput()
+            if(gradeXCoor > gradeCol && gradeYCoor < gradeRow) {
+                gradeXCoor = 1
+                gradeYCoor++
+                focusInput()
+            }
+
+            if(gradeXCoor > gradeCol && gradeYCoor >= gradeRow) {
+                gradeYCoor = 1
+                gradeXCoor = 1
+                focusInput()
+            }
+
+        }else{
+
+            // switching direction = 0 
+            // vetical
+            gradeYCoor++
+            if(gradeYCoor <= gradeRow) {
+                focusInput()
+            }
+
+            if(gradeYCoor > gradeRow && gradeXCoor < gradeCol) {
+                gradeYCoor = 1
+                gradeXCoor++
+                focusInput()
+            }
+
+            if(gradeYCoor > gradeRow && gradeXCoor >= gradeCol) {
+                gradeXCoor = 1
+                gradeYCoor = 1
+                focusInput()
+            }
+
         }
+        
+
     }
     //ArrowDown
     if(e.keyCode == 40 && (gradeYCoor < gradeRow) ) {
