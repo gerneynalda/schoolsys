@@ -128,12 +128,18 @@ startQuery.addEventListener("click", async (e)=> {
 
             curriculumSubjects = await getCurriculumSubjects(queryIDS.curriculum_id, queryIDS.strand_id)
             
-            // total number of subjects is total number columns
-            gradeCol = Object.keys(curriculumSubjects.data).length
+            // total number of subjects is total number columns 
+            // except on senior high school subjects
+            // the number of subjects return are the total but only subjects per sem are shown
+            gradeCol = 0 //Object.keys(curriculumSubjects.data).length
 
             // subjects header
             for(let i in curriculumSubjects.data) {
+                // checks if a subject has the same semester id
+                // they're the same meaning it is included in the header column therefore it is counted as part of gradeCol
                 if(curriculumSubjects.data[i].semester_id == queryIDS.semester_id){
+                    // +1 to gradeCol
+                    gradeCol++
                     sfts.push(curriculumSubjects.data[i].subject_id)
                     tsr += `<th data-toggle="tooltip" data-placement="bottom" title="${subjectMasterList.get(curriculumSubjects.data[i].subject_id).name}">${subjectMasterList.get(curriculumSubjects.data[i].subject_id).name.substr(0, 3).toUpperCase()}</th>`    
                 }
@@ -145,11 +151,15 @@ startQuery.addEventListener("click", async (e)=> {
             curriculumTraits = await getCurriculumTraits(queryIDS.curriculum_id, queryIDS.strand_id)
 
             // total number of traits is total number columns
-            gradeCol = Object.keys(curriculumTraits.data).length
+            gradeCol = 0 // Object.keys(curriculumTraits.data).length
 
             // traits header
             for(let i in curriculumTraits.data) {
                 if(curriculumTraits.data[i].semester_id == queryIDS.semester_id){
+                    // checks if a trait has the same semester id
+                    // they're the same meaning it is included in the header column therefore it is counted as part of gradeCol
+                    // +1 to gradeCol
+                    gradeCol++
                     sfts.push(curriculumTraits.data[i].trait_id)
                     tsr += `<th data-toggle="tooltip" data-placement="bottom" title="${traitMasterList.get(curriculumTraits.data[i].trait_id).decription}">${traitMasterList.get(curriculumTraits.data[i].trait_id).description}</th>`    
                 }
@@ -262,28 +272,24 @@ tableStudentsGradeRows.addEventListener("keyup", async (e)=> {
     }
     //ArrowDown
     if(e.keyCode == 40 && (gradeYCoor < gradeRow) ) {
-        console.log(gradeYCoor)
         gradeYCoor++
 
         focusInput()
     }
     // ArrowRight
     if(e.keyCode == 39 && (gradeXCoor < gradeCol)) {
-        console.log(gradeXCoor)
         gradeXCoor++
 
         focusInput()
     }
     //ArrowUp
     if(e.keyCode == 38 && (gradeYCoor > 1)) {
-        console.log(gradeYCoor)
         gradeYCoor--
 
         focusInput()
     }
     // ArrowLeft
     if(e.keyCode == 37 && (gradeXCoor > 1)) {
-        console.log(gradeXCoor)
         gradeXCoor--
 
         focusInput()
