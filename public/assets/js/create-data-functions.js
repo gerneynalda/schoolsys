@@ -184,14 +184,14 @@ async function createPeriod(name)
     return data
 }
 
-async function createSubject(name)
+async function createSubject(name, description)
 {
     let data = await fetch(`${baseUrl}subjectdata/create.json`,{
         method: 'POST',
         headers: {
             "Content-Type" : "application/json"
         },
-        body: JSON.stringify({name:name})
+        body: JSON.stringify({name:name, description:description})
     })
     .then((response) => response.json())
     .then((data) => {

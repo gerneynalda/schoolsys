@@ -139,14 +139,14 @@ async function updatePeriod(id, name)
     return data
 }
 
-async function updateSubject(id, name)
+async function updateSubject(id, name, description)
 {
     let data = await fetch(`${baseUrl}subjectdata/edit.json`,{
         method: 'PUT',
         headers: {
             "Content-Type":"application/json"
         },
-        body: JSON.stringify({subjectid:id,name:name})
+        body: JSON.stringify({subjectid:id,name:name, description:description})
     })
     .then((response) => response.json())
     .then((data) => {

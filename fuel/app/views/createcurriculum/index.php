@@ -135,9 +135,9 @@
 			</form>
 		</div>
 		<div class="list">
-			<ul class="list-group" id="subject-list-group">	
+			<div class="list-group" id="subject-list-group">	
 			<!-- Subject List -->
-			</ul>
+			</div>
 		</div>
 		<div class="panel-footer">
 			<div class="btn-group" role="group">
@@ -291,8 +291,12 @@
         
 			<form>
 				<div class="form-group">
-					<label for="period-name-input">Name</label>
-					<input type="text" class="form-control" id="subject-name-input" placeholder="Name" autofocus=true />
+					<label for="subject-name-input">Name</label>
+					<input type="text" class="form-control" id="subject-name-input" placeholder="Name" autofocus="autofocus" />
+				</div>
+				<div class="form-group">
+					<label for="subject-description-input">Description</label>
+					<textarea type="text" class="form-control" id="subject-description-input" placeholder="Description" rows="4"></textarea>
 				</div>
 				<button type="button" class="btn btn-primary" id="subject-save-button"><i class="fa-solid fa-save"></i> save</button>
 			</form>

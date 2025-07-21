@@ -6,6 +6,7 @@ class Model_Subject extends Model
 	protected static $_properties = array(
 		'id',
 		'name',
+		'description',
 		'created_at',
 		'updated_at',
 	);

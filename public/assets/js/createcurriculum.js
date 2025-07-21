@@ -581,11 +581,13 @@ let subjectListUI = document.querySelector("#subject-list-group")
 let createSubjectModalTrigger = document.querySelector("#create-subject-modal-trigger")
 let closeSubjectModalTrigger = document.querySelector("#close-subject-modal")
 let subjectNameInputField = document.querySelector("#subject-name-input")
+let subjectDescriptionInputField = document.querySelector("#subject-description-input")
 let subjectSaveButton = document.querySelector("#subject-save-button")
 let subjectListData = []
 let subjectData = {
     "id" : "",
-    "name" : ""
+    "name" : "",
+    "description": ""
 }
 
 // Update subjectListUI
@@ -593,17 +595,18 @@ async function updateSubjectListUI() {
     // get subjectMasterList
     let result = await getSubjectMasterList()
     subjectListData = result.data
-    
+    console.log(subjectListData)
     // prepare list
     let list = '';
     for(let index in subjectListData) {
-        list += `<li class="list-group-item" data-subjectid=${subjectListData[index].id} data-subjectsname="${subjectListData[index].name}">
-            ${subjectListData[index].name}
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default btn-xs edit-subject" data-subjectname='${subjectListData[index].name}' data-subjecteditid=${subjectListData[index].id}><i class="fa-solid fa-edit"></i></button>
+        list += `<a class="list-group-item" data-subjectid=${subjectListData[index].id} data-subjectsname="${subjectListData[index].name}" data-subjectsdescription="${subjectListData[index].description}">
+            <h4 class="list-group-item-heading">${subjectListData[index].name}</h4>
+            <p class="list-group-item-text">${subjectListData[index].description}</p>
+            <div class="btn-group subject-btns" role="group">
+                <button type="button" class="btn btn-default btn-xs edit-subject" data-subjectname='${subjectListData[index].name}' data-subjectdescription="${subjectListData[index].description}" data-subjecteditid=${subjectListData[index].id}><i class="fa-solid fa-edit"></i></button>
                 <button type="button" class="btn btn-default btn-xs delete-subject" data-subjectdeleteid=${subjectListData[index].id}><i class="fa-solid fa-trash"></i></button>
             </div>
-        </li>`
+        </a>`
     }
     // update UI
     subjectListUI.innerHTML = list
@@ -615,6 +618,11 @@ createSubjectModalTrigger.addEventListener("click", () => {
     // clear subjectData
     subjectData.id = ""
     subjectData.name = ""
+    subjectData.description = ""
+
+    // focus on this field
+    subjectNameInputField.focus()
+    
     $("#subject-create-edit-modal").modal('show')
 
 })
@@ -629,6 +637,7 @@ subjectSaveButton.addEventListener("click", async (e) => {
     if(subjectData.id == "") {
         
         let name = subjectNameInputField.value
+        let description = subjectDescriptionInputField.value
 
         if(name.trim().length <= 0) {
 
@@ -638,12 +647,21 @@ subjectSaveButton.addEventListener("click", async (e) => {
 
         }
 
-        let data = await createSubject(name.trim())
+        if(description.trim().length <= 0) {
+            addNotificationToQeue('alert-warning', "Please input the desciption of this subject.")
+            subjectDescriptionInputField.focus()
+            return false
+        }
+
+
+
+        let data = await createSubject(name.trim(), description.trim())
         if(data.success) {
             // update ui
             updateSubjectListUI()
             // emtpy the field and focus
             subjectNameInputField.value = ""
+            subjectDescriptionInputField.value = ""
             subjectNameInputField.focus()
             // notify
             addNotificationToQeue("alert-success", data.message)
@@ -657,6 +675,7 @@ subjectSaveButton.addEventListener("click", async (e) => {
     if(subjectData.id !== "") {
 
         let name = subjectNameInputField.value
+        let description = subjectDescriptionInputField.value
 
         if(name.trim().length <= 0) {
 
@@ -666,9 +685,18 @@ subjectSaveButton.addEventListener("click", async (e) => {
 
         }
 
+        if(description.trim().length <= 0) {
+
+            addNotificationToQeue("alert-warning", "Please input the name of this subject.")
+            subjectDescriptionInputField.focus()
+            return false
+
+        }
+
         subjectData.name = name
-        
-        let data = await updateSubject(subjectData.id, subjectData.name)
+        subjectData.description = description
+
+        let data = await updateSubject(subjectData.id, subjectData.name, subjectData.description)
         if(data.success) {
              // update ui
              updateSubjectListUI()
@@ -724,7 +752,9 @@ subjectListUI.addEventListener("click", async (e) => {
        
         subjectData.id = e.target.dataset.subjecteditid
         subjectData.name = e.target.dataset.subjectname
+        subjectData.description = e.target.dataset.subjectdescription
         subjectNameInputField.value = e.target.dataset.subjectname
+        subjectDescriptionInputField.value = e.target.dataset.subjectdescription
         $("#subject-create-edit-modal").modal('show')
 
     }

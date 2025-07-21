@@ -161,6 +161,12 @@ html, body {
 
     border-radius: 0;
 }
+.reportcardtemplate-curriculum-sheet-master-list .list-group .list-group-item .btn-group.subject-btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
 .class-master-list .list-group .list-group-item .class-name-and-adviser-label {
     flex-grow: 1;
     pointer-events: none;

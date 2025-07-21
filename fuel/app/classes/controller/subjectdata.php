@@ -30,9 +30,11 @@ Class Controller_Subjectdata extends Controller_Rest
 	{
 
 		$name = Input::json("name");
+		$description = Input::json("description");
 
 		$create = Model_Subject::forge(array(
-			"name" => $name
+			"name" => $name,
+			"description" => $description
 		));
 
 		if($create->save()) {
@@ -59,12 +61,14 @@ Class Controller_Subjectdata extends Controller_Rest
     {
         $id = Input::json('subjectid');
 		$name = Input::json('name');
+		$description = Input::json('description');
 	
 		$subject = Model_Subject::find($id);
 	
 		if($subject) {
 
 			$subject->name = $name;
+			$subject->description = $description;
 
 			if($subject->save()) {
 
