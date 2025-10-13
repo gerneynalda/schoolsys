@@ -27,7 +27,7 @@ class Controller_Classstudentdata extends Controller_Rest
 		INNER JOIN `schoolyearclassstudents` ON `schoolyearclassstudents`.`lrn` = `students`.`lrn` 
 		WHERE `schoolyearclassstudents`.`class_id` = {$class_id} AND `schoolyearclassstudents`.`schoolyear_id` =  {$schoolyear_id} 
 		ORDER BY `students`.`gender` DESC, `students`.`lastname` ASC, `students`.`firstname` ASC" ;
-
+		
 		$class_students = DB::query($sql)->as_object('Model_Student')->execute();
 
 		return $this->response(array(

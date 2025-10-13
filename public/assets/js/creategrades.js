@@ -174,7 +174,7 @@ startQuery.addEventListener("click", async (e)=> {
     let tsgr = ""
     let totalStudents = Object.keys(students.data).length
     let tabIndex = 1
-
+    console.log(students.data)
     // totalStudents is the total number of row
     gradeRow = totalStudents
 

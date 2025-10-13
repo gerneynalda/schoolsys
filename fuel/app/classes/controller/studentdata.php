@@ -34,8 +34,11 @@ class Controller_Studentdata extends Controller_Rest
 
         $lrns = implode(',', $lrns);
 
-        $sql = "SELECT * FROM `students` WHERE `lrn` IN (".$lrns.") ORDER BY `students`.`gender` DESC, `students`.`lastname` ASC, `students`.`firstname` ASC";
+        $sql = "SELECT * FROM `students` WHERE `lrn` IN (".$lrns.")";
+        $sql .= "ORDER BY `students`.`gender` DESC, `students`.`lastname` ASC, `students`.`firstname` ASC";
         $students = DB::query($sql)->as_object('Model_Student')->execute();
+
+        // $students = DB::select()->from('students')->order_by('gender', 'DESC')->order_by('lastname', 'ASC')->order_by('firstname', 'ASC')->where('lrn', "in", $lrns)->as_object('Model_Student')->execute();
 
         return $this->response([
             "success"   => true,

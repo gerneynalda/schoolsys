@@ -60,6 +60,8 @@ btn_ShowStudents.addEventListener("click", async (e)=>{
         return false
     }
 
+    console.log(result.data)
+
     // lrns contains the lrns of the students in a class in a given schoolyear
     // the output of the query getSchoolyearClassStudentList
     let lrns = []
@@ -70,6 +72,8 @@ btn_ShowStudents.addEventListener("click", async (e)=>{
     // get the details of each student using their lrn
     // the query getSchoolyearClasStudentList only returns the lrn of the students in a class it does not include the details
     result = await getStudentListByLrn(lrns)
+
+    console.log(result)
 
     // display in a table the details
     let table_content = ''

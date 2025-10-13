@@ -274,6 +274,28 @@ classListUI.addEventListener("click", async(e)=>{
 
         studentsInClass.class_id = id
         updateClassStudentOfSchoolyearUI()
+
+        // List the students of this class in this schoolyear
+        // if studentsInClass.class_id or studentsInClass.schoolyear_id is empty dont proceed to the rest of the code and notify the user
+        if(studentsInClass.class_id == "" || studentsInClass.schoolyear_id == "") {
+            addNotificationToQeue("alert-danger", "Please select a class and a school year.")
+            return false
+        }
+
+        let result = await getSchoolyearClassStudentList(studentsInClass.class_id, studentsInClass.schoolyear_id)
+        // reset lrn array to empty
+        studentsInClass.lrn = []
+        // rest classStudentUI.innerHTML
+        classStudentUI.innerHTML = ""
+        // insert new lrn to studentsInClass
+        if(result.data.length > 0) {
+            for(let i in result.data) {
+                studentsInClass.lrn.push(result.data[i].lrn)
+            }
+            // update ui
+            updateClassStudentUI(studentsInClass.lrn, classStudentUI)  
+        }
+
     }
     // delete class
     if(e.target.classList.contains("delete-class")) {
